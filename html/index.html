@@ -1,0 +1,130 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0>
+
+  <link href="https://fonts.googleapis.com/css?family=Titillium+Web:200" rel="stylesheet" type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Cabin:400,500,700' rel='stylesheet' type='text/css'>
+  <link href='https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="/css/styles.css">
+
+  <script src="https://code.jquery.com/jquery-2.2.4.min.js"
+    integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+  <script type="text/javascript" src="/js/home.js"></script>
+
+  <title>e l e c t r o n</title>
+</head>
+
+<body>
+  <h1 class="electron-title">electron</h1>
+  <div style="width: 100%; text-align: center;">
+    <div id="join-session">
+      <div>
+        <h1>Join Session</h1>
+        <p>Join an existing session created by a driver using the Session ID provided by them.</p>
+        <div class="form-row">
+          <input type="text" id="session-id" maxlength="10" placeholder="Session ID">
+        </div>
+      </div>
+      <button class="home-btn" onclick="window.location='/player/play/' + $('#session-id').val()">Join Session</button>
+    </div>
+
+    <div id="new-session">
+      <div>
+        <h1>Create Session</h1>
+        <p>Create a new session where you are the driver and other people can join as riders.</p>
+      </div>
+      <button class="home-btn" onclick="window.location='/player/drive/' + generateSessionId()">Create Session</button>
+    </div>
+
+    <div id="solo-session">
+      <div>
+        <h1>Solo Mode</h1>
+        <p>Use the electron waveform generator playing on your own, without driving or being driven.</p>
+      </div>
+      <button class="home-btn" onclick="window.location='/player/play/solo/'">Play Solo</button>
+    </div>
+
+    <div style="clear:both"></div>
+
+    <div id="faq">
+      <h2>Frequently Asked Questions <span>(please read if you are new here!)</span></h2>
+      <div>
+        <a href="#" onclick="$('#faq-content').show(300); $(this).hide(300)">Click here to show F.A.Q.</a>
+      </div>
+      <div style="display:none" id="faq-content">
+        <ol>
+          <li>
+            <strong>What is electron exactly?</strong>
+            <p>
+              electron is a web application under development designed to be an easy to setup
+              and easy to use solution for solo or remote e-stim.
+            </p>
+          </li>
+          <li>
+            <strong>What should I do if it does not work properly?</strong>
+            <p>
+              First of all, make sure you are visiting the web application using the latest version
+              of Google Chrome or Mozilla Firefox. Other browsers have not been tested.
+            </p>
+          </li>
+          <li>
+            <strong>What does A.M. mean?</strong>
+            <p>
+              A.M. stands for Amplitude Modulation. Basically it means the signal's amplitude (volume)
+              will be altered following the shape of another wave. A quick example: If you have your volume
+              set to 55% and set A.M. Type to Sine, A.M. Depth to 13% and A.M. Frequency to 3Hz that means
+              the signal will oscillate between 42% (55-13) and 68% (55+13) three times per second (3Hz) following
+              a sine wave's shape (i.e. smoothly).
+            </p>
+          </li>
+          <li>
+            <strong>How do I use it for remote e-stim?</strong>
+            <p>
+              First of all the driver should get into the website and click the "Create Session" button.
+              There, they will get a Session ID, which will look something like "73cJMc9Plx", it's a combination
+              of 10 letters and numbers. Afterwards, any number of riders can get into the website and paste
+              that code into the input field that says "Session ID" under the Join Session section. After doing
+              that, they will be taken to the sound player screen and any changes the driver makes to the signal
+              will be sent to them and played. Please keep in mind that the Session Id is case-sensitive and
+              sometimes a lowercase "L" and an uppercase "I" can look very similar. The best way to go is to
+              copy and paste.
+            </p>
+          </li>
+          <li>
+            <strong>Does it work on mobile devices?</strong>
+            <p>
+              I have only ran very few and very quick tests but it would seem the answer is yes! At least
+              using Google Chrome on the latest version of Android. That would mean you could drive or be
+              driven pretty much anywhere in the world as long as you have an internet connection handy.
+              Being driven around on public is now a very real possibility.
+            </p>
+          </li>
+          <li>
+            <strong>I am being rejected as a driver! What do I do?</strong>
+            <p>
+              You are probably trying to drive a session someone else is driving. Or perhaps you
+              simply refreshed the page while driving someone. If you do that <strong>you will lose
+                control of the session forever</strong>. electron is a stateless application, which
+              means we do not track who's doing what. If you close a session you were driving and open
+              it again or even refresh the page you will lose control of the session. The good part
+              is that you can easily create a new one and make people join again!
+            </p>
+          </li>
+          <li>
+            <strong>What license is this software distributed under?</strong>
+            <p>
+              electron is distributed under the MIT License. Basically that means you can do whatever you
+              desire with the software and that no warranty of any kind is given so the author shall not be
+              liable for any damages arising from the use of the software.
+            </p>
+          </li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,245 @@
+html {
+	min-height: 100%;
+}
+
+body {
+	background: #f3f3f3;
+	/* Old browsers */
+	background: -moz-linear-gradient(45deg, #f3f3f3 0%, #c0c0c0 100%);
+	/* FF3.6-15 */
+	background: -webkit-linear-gradient(45deg, #f3f3f3 0%, #c0c0c0 100%);
+	/* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(45deg, #f3f3f3 0%, #c0c0c0 100%);
+	/* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	font-family: Cabin, sans-serif;
+}
+
+#main-container,
+#status-message {
+	background: #FFF;
+	border: 0;
+	border-radius: 5px;
+	margin: 30px auto;
+	padding: 15px;
+	width: 1000px;
+}
+
+#status-message {
+	background: #e0e8ff;
+	border: 1px solid #555999;
+	color: #555999;
+	font-size: 18px;
+	line-height: 1.5em;
+	text-align: center;
+}
+
+#left-channel-column,
+#right-channel-column {
+	box-shadow: 0 -2px 3px rgba(0, 0, 0, 0.4) inset;
+	color: #FFF;
+	float: left;
+	margin: 10px;
+	width: 480px;
+}
+
+#left-channel-column div.color-header {
+	background: #03a9f4;
+	padding: 15px;
+}
+
+#right-channel-column div.color-header {
+	background: #8bc34a;
+	padding: 15px;
+}
+
+#left-channel-column .content,
+#right-channel-column .content {
+	color: #444;
+	font-weight: 400;
+	padding: 5px 15px 15px;
+}
+
+#left-channel-column button.apply-btn {
+	background: #03a9f4;
+}
+
+#right-channel-column button.apply-btn {
+	background: #8bc34a;
+}
+
+button.apply-btn,
+button.pain-btn {
+	border: 0;
+	border-radius: 5px;
+	box-shadow: 0 2px 3px rgba(0, 0, 0, 0.4);
+	color: #FFF;
+	cursor: pointer;
+	display: block;
+	font-family: Cabin, sans-serif;
+	font-size: 16px;
+	margin: 30px auto auto;
+	padding: 10px;
+	text-align: center;
+	width: 100%;
+}
+
+button.pain-btn {
+	background: #111;
+}
+
+button.stop-btn {
+	background: #d00;
+	border: 0;
+	border-radius: 20px;
+	box-shadow: 0 2px 3px rgba(0, 0, 0, 0.4);
+	color: #FFF;
+	cursor: pointer;
+	float: right;
+	font-size: 18px;
+	font-weight: 700;
+	line-height: 20px;
+	padding: 10px 20px;
+	position: relative;
+}
+
+button.home-btn {
+	background: #8bc34a;
+	border: 0;
+	border-radius: 20px;
+	box-shadow: 0 2px 3px rgba(0, 0, 0, 0.4);
+	color: #FFF;
+	cursor: pointer;
+	font-size: 18px;
+	font-weight: 700;
+	line-height: 20px;
+	padding: 10px 20px;
+}
+
+h2 {
+	float: left;
+	font-size: 22px;
+	margin: 0;
+}
+
+.form-row {
+	font-size: 16px;
+	margin-bottom: 10px;
+	padding: 0 0 0 15px;
+}
+
+.form-row input,
+.form-row select {
+	background: #FFF;
+	font-family: Cabin, sans-serif;
+	font-size: 16px;
+	font-weight: 300;
+	width: 110px;
+}
+
+.form-row label {
+	display: inline-block;
+	font-weight: 600;
+	width: 230px;
+}
+
+#sketch-holder-wrapper,
+#faq {
+	background: #FFF;
+	border-radius: 5px;
+	margin: auto;
+	padding: 25px;
+	text-align: center;
+	width: 980px;
+}
+
+#sketch-holder {
+	box-shadow: 0 -2px 3px rgba(0, 0, 0, 0.4) inset;
+	padding: 25px;
+}
+
+#sketch-holder-wrapper div.color-header {
+	background: #555;
+	color: #FFF;
+	padding: 15px;
+}
+
+#sketch-holder-wrapper div.color-header h2 {
+	float: none;
+}
+
+#faq {
+	box-shadow: 0 -2px 3px rgba(0, 0, 0, 0.4) inset;
+	text-align: left;
+}
+
+#faq h2 {
+	float: none;
+	margin-bottom: 30px;
+}
+
+#faq h2 span {
+	color: red;
+}
+
+.electron-title {
+	font-family: 'Titillium Web';
+	font-size: 64px;
+	font-weight: 200;
+	letter-spacing: .3em;
+	margin: 0;
+	text-align: center;
+	text-shadow: 0 0 18px #1E90FF;
+}
+
+#session-id {
+	background: #FFF;
+	border: 1px solid #c5c5c5;
+	border-radius: 5px;
+	font-family: Cabin, sans-serif;
+	font-size: 20px;
+	font-weight: 300;
+	padding: 10px;
+	text-align: center;
+	width: 180px;
+}
+
+div#join-session,
+div#new-session,
+div#solo-session {
+	background: #FFF;
+	border-radius: 5px;
+	box-shadow: 0 -2px 3px rgba(0, 0, 0, 0.4) inset;
+	color: #333;
+	display: inline-block;
+	height: 260px;
+	margin: 20px;
+	padding: 20px;
+	text-align: center;
+	width: 300px;
+}
+
+div#join-session div,
+div#new-session div,
+div#solo-session div {
+	height: 190px;
+}
+
+div#join-session p,
+div#new-session p,
+div#solo-session p {
+	color: #888;
+}
+
+.ui-selectmenu-button.ui-button {
+	width: 117px;
+}
+
+.slider-wrapper {
+	margin-bottom: 30px;
+}
+
+#pain-dialog .warning-text {
+	color: #a00;
+	line-height: 150%;
+	margin: 12px 0;
+}
