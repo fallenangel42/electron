@@ -45,6 +45,17 @@ function setup() {
     fftR.setInput(rightOsc);
 }
 
+function selectVisualization(evt, cityName) {
+    // Get all elements with class="tablinks" and remove the class "active"
+    let tablinks = document.getElementsByClassName("tablinks");
+    for (let i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+
+    // Add an "active" class to the button that opened the tab
+    evt.currentTarget.className += " active";
+}
+
 function draw() {
     background(30, 30, 30, 100);
     waveformL = fftL.waveform();

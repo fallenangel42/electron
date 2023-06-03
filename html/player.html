@@ -135,11 +135,19 @@
 	</div>
 
 	<div id="sketch-holder-wrapper">
-		<div class="color-header">
-			<h2>Signal Monitor</h2>
+		<div class="tab">
+			<button class="tablinks" onclick="selectVisualization(event, 'Waveform')">Waveform</button>
+			<button class="tablinks" onclick="selectVisualization(event, 'VU Meter')">VU Meter</button>
+			<button class="tablinks" onclick="selectVisualization(event, 'Spectrum')">Spectrum</button>
+			<button class="tablinks" onclick="selectVisualization(event, 'Lissajous')">Lissajous</button>
 		</div>
-		<div id="sketch-holder">
-		</div>
+		
+		<div id="Waveform" class="tabcontent"></div>
+		<div id="VU Meter" class="tabcontent"></div>
+		<div id="Spectrum" class="tabcontent"></div>
+		<div id="Lissajous" class="tabcontent"></div>
+
+		<div id="sketch-holder"></div>
 	</div>
 
 	<div id="pain-dialog" title="Pain Tool">
