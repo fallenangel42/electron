@@ -43,6 +43,8 @@ function setup() {
     fftL.setInput(leftOsc);
     fftR = new p5.FFT(0.9, 128);
     fftR.setInput(rightOsc);
+
+    // userStartAudio(); // Uncaught ReferenceError: userStartAudio is not defined
 }
 
 function draw() {
