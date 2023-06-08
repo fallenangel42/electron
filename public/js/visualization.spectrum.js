@@ -41,10 +41,10 @@ function drawSpectrum() {
         // text labels for center frequency and frequency span
         fill(textColor);
         noStroke();
-        textAlign(CENTER, BASELINE);
+        textAlign(LEFT, BASELINE);
         textSize(18);
-        text('Center: ' + centerFreq.toFixed(2) + ' Hz.', 90, 25);
-        text('Span: ' + span.toFixed(2) + ' Hz.', 90, 40);
+        text('Center: ' + centerFreq.toFixed(2) + ' Hz.', 20, 35);
+        text('Span: ' + span.toFixed(2) + ' Hz.', 20, 55);
     }
 }
 
