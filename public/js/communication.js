@@ -56,7 +56,9 @@ $(function () {
             });
         });
 
-        $('button').remove();
+        $('button.apply-btn').remove();
+        $('button.pain-btn').remove();
+        $('button.stop-btn').remove();
     } else {
         // ---DRIVER---
         $('#status-message').text('Attempting to register as driver of Session ID ' + sessId + '.');
