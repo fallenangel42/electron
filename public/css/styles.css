@@ -15,7 +15,8 @@ body {
 }
 
 #main-container,
-#status-message {
+#status-message,
+#initialize-audio {
 	background: #FFF;
 	border: 0;
 	border-radius: 5px;
@@ -24,13 +25,18 @@ body {
 	width: 1000px;
 }
 
-#status-message {
+#status-message, #initialize-audio {
 	background: #e0e8ff;
 	border: 1px solid #555999;
 	color: #555999;
 	font-size: 18px;
 	line-height: 1.5em;
 	text-align: center;
+}
+
+#initialize-audio {
+	font-size:24px;
+	font-weight: bold;
 }
 
 #left-channel-column,

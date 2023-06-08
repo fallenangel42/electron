@@ -17,18 +17,30 @@ $(function () {
         if (sessId == 'solo') {
             return;
         }
+
+        let authorizedPlaying = false;
         // let the server know we want to join this session and display an error
         // message if it fails
-        $('#status-message').text('Joined session with Session ID ' + sessId + '.');
+        $('#status-message').text('Joined session with Session ID ' + sessId + '. To start riding, click the button below.');
         socket.emit('registerRider', { sessId: sessId });
         socket.on('riderRejected', function () {
             $('#status-message').text('Could not join session ' + sessId + '. Please check the Session ID.');
+        });
+
+        $('#initialize-audio').show();
+        $('#initialize-audio a').click(function () {
+            authorizedPlaying = true;
+            socket.emit('requestLast', { sessId: sessId });
+            $('#initialize-audio').hide();
         });
 
         // ---RIDER---
         // receive events and populate input fields
         ['left', 'right'].forEach(function (channel) {
             socket.on(channel, function (msg) {
+                if (!authorizedPlaying) {
+                    return;
+                }
                 const channelSel = '#' + channel + '-channel-column ';
                 $(channelSel + 'input[name="volume"]').val(clamp(msg.volume, 0, 100));
                 $(channelSel + 'input[name="frequency"]').val(clamp(msg.freq, 100, 3000));

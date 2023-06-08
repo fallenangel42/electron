@@ -62,6 +62,10 @@ io.on('connection', function (socket) {
             riders[sessId] = [];
             riders[sessId].push(socket);
         }
+    });
+
+    socket.on('requestLast', function (msg) {
+        const sessId = msg.sessId;
         if (sessId in lastMessages && 'left' in lastMessages[sessId]) {
             // send the last status for the left channel so this new rider
             // is synchronized with the current status
@@ -93,20 +97,32 @@ io.on('connection', function (socket) {
 
     // left channel updates... send them over to all riders
     socket.on('left', function (msg) {
-        if (msg.sessId in riders && msg.driverToken == driverTokens[msg.sessId]) {
+        if (!msg.sessId || !(msg.sessId in driverTokens) || msg.driverToken != driverTokens[msg.sessId]) {
+            return;
+        }
+
+        // store the current status of the left channel for the future
+        lastMessages[msg.sessId].left = msg;
+        // send real time updates to all riders
+        if (msg.sessId in riders) {
             riders[msg.sessId].forEach(function (s) {
                 s.emit('left', msg);
-                lastMessages[msg.sessId].left = msg;
             });
         }
     });
 
     // right channel updates... send them over to all riders
     socket.on('right', function (msg) {
-        if (msg.sessId in riders && msg.driverToken == driverTokens[msg.sessId]) {
+        if (!msg.sessId || !(msg.sessId in driverTokens) || msg.driverToken != driverTokens[msg.sessId]) {
+            return;
+        }
+
+        // store the current status of the right channel for the future
+        lastMessages[msg.sessId].right = msg;
+        // send real time updates to all riders
+        if (msg.sessId in riders) {
             riders[msg.sessId].forEach(function (s) {
                 s.emit('right', msg);
-                lastMessages[msg.sessId].right = msg;
             });
         }
     });
