@@ -15,7 +15,8 @@ body {
 }
 
 #main-container,
-#status-message {
+#status-message,
+#initialize-audio {
 	background: #FFF;
 	border: 0;
 	border-radius: 5px;
@@ -24,13 +25,18 @@ body {
 	width: 1000px;
 }
 
-#status-message {
+#status-message, #initialize-audio {
 	background: #e0e8ff;
 	border: 1px solid #555999;
 	color: #555999;
 	font-size: 18px;
 	line-height: 1.5em;
 	text-align: center;
+}
+
+#initialize-audio {
+	font-size:24px;
+	font-weight: bold;
 }
 
 #left-channel-column,
@@ -157,14 +163,35 @@ h2 {
 	padding: 25px;
 }
 
-#sketch-holder-wrapper div.color-header {
-	background: #555;
-	color: #FFF;
-	padding: 15px;
+/* Style the tab */
+.tab {
+	overflow: hidden;
+	border: 1px solid #ccc;
+	background-color: #ddd;
 }
 
-#sketch-holder-wrapper div.color-header h2 {
-	float: none;
+/* Style the buttons that are used to open the tab content */
+.tab button {
+	background-color: inherit;
+	float: left;
+	border: 1px solid #ccc;
+	outline: none;
+	cursor: pointer;
+	padding: 14px 16px;
+	transition: 0.3s;
+	font-family: Cabin, sans-serif;
+	font-size: 16px;
+	font-weight: 600;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+	background-color: #ccc;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+	background-color: #bbb;
 }
 
 #faq {

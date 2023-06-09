@@ -78,6 +78,11 @@ $(document).ready(function () {
             ampModulator.freq(amFrequency);
             ampModulator.amp(amDepth);
             ampModulator.setType(amType);
+            // ampModulator.phase(0); // This does not appear to reset the phase, possibly a bug in p5.Oscillator.
+            // Restart the oscillator. Will stop the oscillator first if already started.
+            // This restart allows the driver to reset the phase by clicking Apply, even if no changes were made.
+            // If Apply button is eventually removed, it would still be nice to have phase reset button(s) for amplitude and frequency modulators.
+            ampModulator.start();
             osc.amp(volume, 0.5);
             osc.amp(ampModulator);
         } else {
@@ -92,6 +97,7 @@ $(document).ready(function () {
             freqModulator.freq(fmFrequency);
             freqModulator.amp(fmDepth);
             freqModulator.setType(fmType);
+            freqModulator.start(); // See comments regarding ampModulator.start() above.
             osc.freq(frequency);
             osc.freq(freqModulator);
         } else {

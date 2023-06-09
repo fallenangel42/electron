@@ -18,6 +18,10 @@
 	<script src="/js/p5.min.js"></script>
 	<script src="/js/addons/p5.dom.min.js"></script>
 	<script src="/js/addons/p5.sound.min.js"></script>
+	<script src="/js/visualization.lissajous.js"></script>
+	<script src="/js/visualization.spectrum.js"></script>
+	<script src="/js/visualization.vumeter.js"></script>
+	<script src="/js/visualization.waveform.js"></script>
 	<script src="/js/sketch.js"></script>
 
 	<title>e l e c t r o n</title>
@@ -28,6 +32,10 @@
 
 	<div id="status-message">
 		Welcome to electron! You are currently playing in «solo mode».
+	</div>
+
+	<div style="display:none;" id="initialize-audio">
+		<a href="#">Click here to start audio output for this session</a>
 	</div>
 
 	<div id="main-container">
@@ -135,11 +143,19 @@
 	</div>
 
 	<div id="sketch-holder-wrapper">
-		<div class="color-header">
-			<h2>Signal Monitor</h2>
+		<div class="tab">
+			<button class="tablinks active" onclick="selectVisualization(event, 'Waveform')">Waveform</button>
+			<button class="tablinks" onclick="selectVisualization(event, 'VU Meter')">VU Meter</button>
+			<button class="tablinks" onclick="selectVisualization(event, 'Spectrum')">Spectrum</button>
+			<button class="tablinks" onclick="selectVisualization(event, 'Lissajous')">Lissajous</button>
 		</div>
-		<div id="sketch-holder">
-		</div>
+		
+		<div id="Waveform" class="tabcontent"></div>
+		<div id="VU Meter" class="tabcontent"></div>
+		<div id="Spectrum" class="tabcontent"></div>
+		<div id="Lissajous" class="tabcontent"></div>
+
+		<div id="sketch-holder"></div>
 	</div>
 
 	<div id="pain-dialog" title="Pain Tool">
