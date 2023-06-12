@@ -34,23 +34,23 @@ function drawVuMeter() {
         let freqL = wavLf.waveform('float');
         // NOTE: Total amplitude (volume + AM depth) can be greater than 1,
         // resulting in clipping and distortion of the tone.
-        // The VU Meter will go past its maximum to draw attention to this effect.
-        let leftAmpl = leftOsc.getAmp() + amplL[0];
+        // However, we clamp the VU Meter to a maximum of 1.
+        let leftAmpl = Math.min(Math.abs(leftOsc.getAmp() + amplL[0]), 1);
         leftFreq = leftOsc.getFreq() + freqL[0];
 
         // Fill left rectangle
-        drawRectangle(25, 25, Math.abs(leftAmpl) * (width - 50), 50, leftColor, 'none');
+        drawRectangle(25, 25, leftAmpl * (width - 50), 50, leftColor, 'none');
         displayText(`Left Frequency: ${leftFreq.toFixed(2)} Hz.`, width / 6, 185);
     }
 
     if (rightOsc.started) {
         let amplR = wavRa.waveform();
         let freqR = wavRf.waveform('float');
-        let rightAmpl = rightOsc.getAmp() + amplR[0];
+        let rightAmpl = Math.min(Math.abs(rightOsc.getAmp() + amplR[0]), 1);
         rightFreq = rightOsc.getFreq() + freqR[0];
 
         // Fill right rectangle
-        drawRectangle(25, 100, Math.abs(rightAmpl) * (width - 50), 50, rightColor, 'none');
+        drawRectangle(25, 100, rightAmpl * (width - 50), 50, rightColor, 'none');
         displayText(`Right Frequency: ${rightFreq.toFixed(2)} Hz.`, 5 * width / 6, 185);
     }
 

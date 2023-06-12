@@ -1,3 +1,28 @@
+// Utility function for determining common frequency plot limits for left and right channels
+function getFrequencyLimits() {
+
+    let leftMin = leftOsc.getFreq();
+    let leftMax = leftOsc.getFreq();
+    let rightMin = rightOsc.getFreq();
+    let rightMax = rightOsc.getFreq();
+
+    if (leftOsc.started) {
+        leftMin = leftMin - fModL.getAmp();
+        leftMax = leftMax + fModL.getAmp();
+    }
+    if (rightOsc.started) {
+        rightMin = rightMin - fModR.getAmp();
+        rightMax = rightMax + fModR.getAmp();
+    }
+    let freqMin = Math.min(leftMin, rightMin);
+    let freqMax = Math.max(leftMax, rightMax);
+    if (freqMin == freqMax) {
+        freqMin = freqMin - 1;
+        freqMax = freqMax + 1;
+    }
+    return [freqMin, freqMax];
+}
+
 function drawLissajous() {
     strokeWeight(4);
     noFill();
@@ -33,27 +58,29 @@ function drawLissajous() {
     let amplL = wavLa.waveform();
     let amplR = wavRa.waveform();
 
-    // bottom horizontal line for left channel along x axis
-    stroke(leftColor);
-    line((width - height) / 2, height, (width + height) / 2, height);
-
-    // left vertical line for right channel along y axis
+    // vertical line at left channel volume
+    const xA = map(leftOsc.getAmp(), 0, 1, (width - height) / 2, (width + height) / 2);
     stroke(rightColor);
-    line((width - height) / 2, 0, (width - height) / 2, height);
+    line(xA, 0, xA, height);
+
+    // horizontal line at right channel volume
+    const yA = map(rightOsc.getAmp(), 0, 1, height, 0);
+    stroke(leftColor);
+    line((width - height) / 2, yA, (width + height) / 2, yA);
 
     // Lissajous
     plotLength = Math.min(amplL.length, amplR.length);
     stroke(lissajousColor);
     beginShape();
     for (let iLR = 0; iLR < plotLength; iLR++) {
-        let al = Math.abs(leftOsc.getAmp() + amplL[iLR]);
-        let ar = Math.abs(rightOsc.getAmp() + amplR[iLR]);
+        let al = Math.min(Math.abs(leftOsc.getAmp() + amplL[iLR]), 1);
+        let ar = Math.min(Math.abs(rightOsc.getAmp() + amplR[iLR]), 1);
         // NOTE: AM oscillators return nonzero values even if main oscillator not started
         if (!leftOsc.started) {
-            al = 0;
+            al = leftOsc.getAmp();
         }
         if (!rightOsc.started) {
-            ar = 0;
+            ar = rightOsc.getAmp();
         }
         const xLR = map(al, 0, 1, (width - height) / 2, (width + height) / 2);
         const yLR = map(ar, 0, 1, height, 0);
@@ -67,13 +94,17 @@ function drawLissajous() {
     let freqL = wavLf.waveform('float');
     let freqR = wavRf.waveform('float');
 
-    // bottom horizontal line for left channel along x axis
-    stroke(leftColor);
-    line((5 * width - 3 * height) / 6, height, (5 * width + 3 * height) / 6, height);
+    const [freqMin, freqMax] = getFrequencyLimits();
 
-    // left vertical line for right channel along y axis
+    // vertical line at left channel carrier frequency
     stroke(rightColor);
-    line((5 * width - 3 * height) / 6, 0, (5 * width - 3 * height) / 6, height);
+    const xF = map(leftOsc.getFreq(), freqMin, freqMax, (5 * width - 3 * height) / 6, (5 * width + 3 * height) / 6);
+    line(xF, 0, xF, height);
+
+    // horizontal line at right channel carrier frequency
+    stroke(leftColor);
+    const yF = map(rightOsc.getFreq(), freqMin, freqMax, height, 0);
+    line((5 * width - 3 * height) / 6, yF, (5 * width + 3 * height) / 6, yF);
 
     // Lissajous
     plotLength = Math.min(freqL.length, freqR.length);
@@ -84,13 +115,13 @@ function drawLissajous() {
         let fr = Math.abs(rightOsc.getFreq() + freqR[iLR]);
         // NOTE: FM oscillators return nonzero values even if main oscillator not started
         if (!leftOsc.started) {
-            fl = 0;
+            fl = (freqMin + freqMax) / 2;
         }
         if (!rightOsc.started) {
-            fr = 0;
+            fr = (freqMin + freqMax) / 2;
         }
-        const xLR = map(fl, 0, 2000, (5 * width - 3 * height) / 6, (5 * width + 3 * height) / 6);
-        const yLR = map(fr, 0, 2000, height, 0);
+        const xLR = map(fl, freqMin, freqMax, (5 * width - 3 * height) / 6, (5 * width + 3 * height) / 6);
+        const yLR = map(fr, freqMin, freqMax, height, 0);
         vertex(xLR, yLR);
     }
     endShape();
