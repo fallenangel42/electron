@@ -7,8 +7,9 @@
 
 	<link href="https://fonts.googleapis.com/css?family=Titillium+Web:200" rel="stylesheet" type='text/css'>
 	<link href='https://fonts.googleapis.com/css?family=Cabin:400,500,700' rel='stylesheet' type='text/css'>
-	<link href='https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css' rel='stylesheet' type='text/css'>
-	<link rel="stylesheet" href="/css/styles.css">
+	<link href='https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css' rel='stylesheet' type='text/css'
+		id='jqueryui-stylesheet'>
+	<link rel="stylesheet" href="/css/styles.css" id='local-stylesheet'>
 
 	<script src="https://code.jquery.com/jquery-2.2.4.min.js"
 		integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
@@ -23,11 +24,13 @@
 	<script src="/js/visualization.vumeter.js"></script>
 	<script src="/js/visualization.waveform.js"></script>
 	<script src="/js/sketch.js"></script>
+	<script src="/js/themes.js"></script>
 
 	<title>e l e c t r o n</title>
 </head>
 
 <body>
+	<button onclick="toggleTheme()" id="theme-toggler">Toggle Theme</button>
 	<h1 class="electron-title">electron</h1>
 
 	<div id="status-message">
@@ -149,7 +152,7 @@
 			<button class="tablinks" onclick="selectVisualization(event, 'Spectrum')">Spectrum</button>
 			<button class="tablinks" onclick="selectVisualization(event, 'Lissajous')">Lissajous</button>
 		</div>
-		
+
 		<div id="Waveform" class="tabcontent"></div>
 		<div id="VU Meter" class="tabcontent"></div>
 		<div id="Spectrum" class="tabcontent"></div>

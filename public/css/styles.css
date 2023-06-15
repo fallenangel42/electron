@@ -25,7 +25,8 @@ body {
 	width: 1000px;
 }
 
-#status-message, #initialize-audio {
+#status-message,
+#initialize-audio {
 	background: #e0e8ff;
 	border: 1px solid #555999;
 	color: #555999;
@@ -35,7 +36,7 @@ body {
 }
 
 #initialize-audio {
-	font-size:24px;
+	font-size: 24px;
 	font-weight: bold;
 }
 
@@ -269,4 +270,21 @@ div#solo-session p {
 	color: #a00;
 	line-height: 150%;
 	margin: 12px 0;
+}
+
+#theme-toggler {
+	background-color: #fff;
+	border: none;
+	border-radius: 5px;
+	bottom: 20px;
+	box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.15);
+	color: #444;
+	cursor: pointer;
+	left: 20px;
+	outline: none;
+	padding: 10px 20px;
+	position: fixed;
+	text-align: center;
+	z-index: 1000;
+	font-weight: bold;
 }

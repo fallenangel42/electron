@@ -1,0 +1,297 @@
+html {
+    min-height: 100%;
+}
+
+body {
+    background: #151515;
+    font-family: Cabin, sans-serif;
+}
+
+a {
+    color: #ccc;
+}
+
+#main-container,
+#status-message,
+#initialize-audio {
+    background: #303030;
+    border: 0;
+    border-radius: 5px;
+    margin: 30px auto;
+    padding: 15px;
+    width: 1000px;
+}
+
+#status-message,
+#initialize-audio {
+    background: #404040;
+    border: 1px solid #888;
+    color: #ccc;
+    font-size: 18px;
+    line-height: 1.5em;
+    text-align: center;
+}
+
+#initialize-audio {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+#left-channel-column,
+#right-channel-column {
+    box-shadow: 0 -2px 3px rgba(0, 0, 0, 0.4) inset;
+    color: #FFF;
+    float: left;
+    margin: 10px;
+    width: 480px;
+}
+
+#left-channel-column div.color-header {
+    background: #03a9f4;
+    color: black;
+    padding: 15px;
+}
+
+#right-channel-column div.color-header {
+    background: #8bc34a;
+    color: black;
+    padding: 15px;
+}
+
+#left-channel-column .content,
+#right-channel-column .content {
+    color: #aaa;
+    font-weight: 400;
+    padding: 5px 15px 15px;
+}
+
+#left-channel-column button.apply-btn {
+    background: #03a9f4;
+    color: black;
+}
+
+#right-channel-column button.apply-btn {
+    background: #8bc34a;
+    color: black;
+}
+
+button.apply-btn,
+button.pain-btn {
+    border: 0;
+    border-radius: 5px;
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.4);
+    color: #FFF;
+    cursor: pointer;
+    display: block;
+    font-family: Cabin, sans-serif;
+    font-size: 16px;
+    margin: 30px auto auto;
+    padding: 10px;
+    text-align: center;
+    width: 100%;
+}
+
+button.pain-btn {
+    background: #400;
+}
+
+button.stop-btn {
+    background: #d00;
+    border: 0;
+    border-radius: 20px;
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.4);
+    color: #FFF;
+    cursor: pointer;
+    float: right;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 20px;
+    padding: 10px 20px;
+    position: relative;
+}
+
+button.home-btn {
+    background: #8bc34a;
+    border: 0;
+    border-radius: 20px;
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.4);
+    color: black;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 20px;
+    padding: 10px 20px;
+}
+
+h2 {
+    float: left;
+    font-size: 22px;
+    margin: 0;
+}
+
+.form-row {
+    font-size: 16px;
+    margin-bottom: 10px;
+    padding: 0 0 0 15px;
+}
+
+.form-row input,
+.form-row select {
+    font-family: Cabin, sans-serif;
+    font-size: 16px;
+    font-weight: 300;
+    width: 110px;
+}
+
+.form-row label {
+    display: inline-block;
+    font-weight: 600;
+    width: 230px;
+}
+
+#sketch-holder-wrapper,
+#faq {
+    background: #303030;
+    border-radius: 5px;
+    margin: auto;
+    padding: 25px;
+    text-align: center;
+    width: 980px;
+    color: #ccc;
+}
+
+#sketch-holder {
+    box-shadow: 0 -2px 3px rgba(0, 0, 0, 0.4) inset;
+    padding: 25px;
+}
+
+/* Style the tab */
+.tab {
+    overflow: hidden;
+    border: 1px solid #444;
+    background-color: #333;
+}
+
+/* Style the buttons that are used to open the tab content */
+.tab button {
+    background-color: inherit;
+    float: left;
+    border: 1px solid #444;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+    font-family: Cabin, sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: #ccc;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+    background-color: #555;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+    background-color: #444;
+}
+
+#faq {
+    box-shadow: 0 -2px 3px rgba(0, 0, 0, 0.4) inset;
+    text-align: left;
+}
+
+#faq h2 {
+    float: none;
+    margin-bottom: 30px;
+}
+
+#faq h2 span {
+    color: red;
+}
+
+#session-id {
+    color: white;
+}
+
+.electron-title {
+    font-family: 'Titillium Web';
+    font-size: 64px;
+    font-weight: 200;
+    letter-spacing: .3em;
+    margin: 0;
+    text-align: center;
+    text-shadow: 0 0 5px #3EB0FF, 0 0 15px #3EB0FF;
+    color: #3eB0FF;
+}
+
+#session-id {
+    background: #404040;
+    border: 1px solid #888;
+    border-radius: 5px;
+    font-family: Cabin, sans-serif;
+    font-size: 20px;
+    font-weight: 300;
+    padding: 10px;
+    text-align: center;
+    width: 180px;
+}
+
+div#join-session,
+div#new-session,
+div#solo-session {
+    background: #303030;
+    border-radius: 5px;
+    box-shadow: 0 -2px 3px rgba(0, 0, 0, 0.4) inset;
+    color: #ccc;
+    display: inline-block;
+    height: 260px;
+    margin: 20px;
+    padding: 20px;
+    text-align: center;
+    width: 300px;
+}
+
+div#join-session div,
+div#new-session div,
+div#solo-session div {
+    height: 190px;
+}
+
+div#join-session p,
+div#new-session p,
+div#solo-session p {
+    color: #888;
+}
+
+.ui-selectmenu-button.ui-button {
+    width: 117px;
+}
+
+.slider-wrapper {
+    margin-bottom: 30px;
+}
+
+#pain-dialog .warning-text {
+    color: #a00;
+    line-height: 150%;
+    margin: 12px 0;
+}
+
+#theme-toggler {
+    background-color: #333;
+    border: none;
+    border-radius: 5px;
+    bottom: 20px;
+    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.25);
+    color: #fff;
+    cursor: pointer;
+    left: 20px;
+    outline: none;
+    padding: 10px 20px;
+    position: fixed;
+    text-align: center;
+    z-index: 1000;
+	font-weight: bold;
+}
