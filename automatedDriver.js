@@ -163,7 +163,7 @@ class AutomatedDriver {
             }
 
             // if it has been more than 5 minutes and no one has joined, kill it
-            if (elapsedMinutes >= 2 && !this.inUse) {
+            if (elapsedMinutes >= 5 && !this.inUse) {
                 console.log(`Automated driver ${this.sessId} has no listeners!`);
                 clearTimeout(this.stopTimeoutId);
                 this.stop(electronState);
