@@ -1,16 +1,32 @@
 const express = require('express');
+const path = require('path');
 const app = require('express')();
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
 const PORT = process.env.PORT || 5000;
-const { generateToken } = require('./utils');
+const { generateToken, generateAutomatedSessId } = require('./utils');
 const ElectronState = require('./electronState');
+const automatedDriverConfig = require('./automatedDriverConfig');
 
 const electronState = new ElectronState();
 
+// set template engine
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
+
 // home page
 app.get('/', function (req, res) {
-    res.sendFile(__dirname + '/html/index.html');
+    res.render('index');
+});
+
+// start new automated driver
+app.get('/start-automated-driver/', function (req, res) {
+    const sessId = generateAutomatedSessId();
+    if (electronState.startAutomatedDriver(sessId, automatedDriverConfig)) {
+        res.render('automated', { sessId: sessId, sessDuration: automatedDriverConfig.sessionDuration });
+    } else {
+        res.status(500).send('Failed to start automated driver');
+    }
 });
 
 // player page
@@ -19,10 +35,10 @@ app.get('/player/:mode/:sessId', function (req, res) {
     const sessId = req.params.sessId;
     if ((mode === 'play' || mode === 'drive') && sessId.length === 10) {
         // joining or driving a session
-        res.sendFile(__dirname + '/html/player.html');
+        res.render('player');
     } else if (mode === 'play' && sessId === 'solo') {
         // solo play
-        res.sendFile(__dirname + '/html/player.html');
+        res.render('player');
     } else {
         // something went wrong -> 404!
         res.status(404);

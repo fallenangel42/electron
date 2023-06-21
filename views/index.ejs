@@ -32,15 +32,20 @@
           <input type="text" id="session-id" maxlength="10" placeholder="Session ID">
         </div>
       </div>
-      <button class="home-btn" onclick="window.location='/player/play/' + $('#session-id').val()">Join Session</button>
+      <div class="home-btn-wrapper">
+        <button class="home-btn" onclick="window.location='/player/play/' + $('#session-id').val()">Join Session</button>
+      </div>
     </div>
 
     <div id="new-session">
       <div>
         <h1>Create Session</h1>
-        <p>Create a new session where you are the driver and other people can join as riders.</p>
+        <p>Create a new session where you are the driver and other people can join as riders, or a session driven automatically by an AI.</p>
       </div>
-      <button class="home-btn" onclick="window.location='/player/drive/' + generateSessionId()">Create Session</button>
+      <div class="home-btn-wrapper">
+        <button class="home-btn" onclick="window.location='/start-automated-driver/'">Create Automated Session</button>
+        <button class="home-btn" onclick="window.location='/player/drive/' + generateSessionId()">Create Normal Session</button>
+      </div>
     </div>
 
     <div id="solo-session">
@@ -48,7 +53,9 @@
         <h1>Solo Mode</h1>
         <p>Use the electron waveform generator playing on your own, without driving or being driven.</p>
       </div>
-      <button class="home-btn" onclick="window.location='/player/play/solo/'">Play Solo</button>
+      <div class="home-btn-wrapper">
+        <button class="home-btn" onclick="window.location='/player/play/solo/'">Play Solo</button>
+      </div>
     </div>
 
     <div style="clear:both"></div>

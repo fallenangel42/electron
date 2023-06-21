@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0>
+
+	<link href="https://fonts.googleapis.com/css?family=Titillium+Web:200" rel="stylesheet" type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=Cabin:400,500,700' rel='stylesheet' type='text/css'>
+	<link href='https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css' rel='stylesheet' type='text/css'
+		id='jqueryui-stylesheet'>
+	<link rel="stylesheet" href="/css/styles.css" id='local-stylesheet'>
+
+	<script src="https://code.jquery.com/jquery-2.2.4.min.js"
+		integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+	<script src="/js/themes.js"></script>
+
+	<title>e l e c t r o n</title>
+</head>
+
+<body>
+	<button onclick="toggleTheme()" id="theme-toggler">Toggle Theme</button>
+	<h1 class="electron-title">electron</h1>
+
+	<div id="status-message">
+		You have initialized an automated session. Anyone can now join it by using the following session id:
+		<br><br>
+		<strong style="font-size: 150%;"><%= sessId %></strong>
+		<br><br>
+		Automated sessions on this server are set to last for <strong><%= sessDuration %> minutes</strong>.
+		<br>
+		If no one joins within <strong>5 minutes</strong>, the session will be automatically terminated.
+		<br><br>
+		You can safely close this window after you have copied the session id.
+	</div>
+
+</body>
+
+</html>

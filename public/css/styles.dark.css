@@ -111,6 +111,7 @@ button.stop-btn {
 }
 
 button.home-btn {
+    align-self: flex-end;
     background: #8bc34a;
     border: 0;
     border-radius: 20px;
@@ -120,7 +121,9 @@ button.home-btn {
     font-size: 18px;
     font-weight: 700;
     line-height: 20px;
+    margin-top: 10px;
     padding: 10px 20px;
+    width: 100%;
 }
 
 h2 {
@@ -245,8 +248,8 @@ div#solo-session {
     border-radius: 5px;
     box-shadow: 0 -2px 3px rgba(0, 0, 0, 0.4) inset;
     color: #ccc;
-    display: inline-block;
-    height: 260px;
+    display: inline-grid;
+    height: 300px;
     margin: 20px;
     padding: 20px;
     text-align: center;
@@ -257,6 +260,14 @@ div#join-session div,
 div#new-session div,
 div#solo-session div {
     height: 190px;
+}
+
+div#join-session div.home-btn-wrapper,
+div#new-session div.home-btn-wrapper,
+div#solo-session div.home-btn-wrapper {
+    height: 100px;
+    display: flex;
+    flex-direction: column-reverse;
 }
 
 div#join-session p,
@@ -293,5 +304,5 @@ div#solo-session p {
     position: fixed;
     text-align: center;
     z-index: 1000;
-	font-weight: bold;
+    font-weight: bold;
 }
