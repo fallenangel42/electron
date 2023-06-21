@@ -46,6 +46,11 @@ app.get('/player/:mode/:sessId', function (req, res) {
     }
 });
 
+app.get("/favicon.ico", async (req, res) => {
+    res.status(200)
+    res.sendFile(__dirname + '/public/favicon.ico')
+});
+
 io.on('connection', function (socket) {
     console.log('User connected');
     socket.on('registerRider', function (msg) {
