@@ -11,20 +11,21 @@ class AutomatedDriver {
         this.maxFrequency = config.maxFrequency || 2000;
         this.initialFrequency = config.initialFrequency || 1500;
         this.msBetweenUpdates = config.msBetweenUpdates || 15000;
+        this.startVolume = config.startVolume || 50;
 
         // set initial internal state
         this.inUse = false; // is anyone listening to this session?
         this.sessId = sessId;
         this.startTime = new Date();
         this.leftChannel = {
-            volume: 50,
+            volume: this.startVolume,
             freq: this.initialFrequency,
             amType: 'none',
             amDepth: 0,
             amFreq: 0
         };
         this.rightChannel = {
-            volume: 50,
+            volume: this.startVolume,
             freq: this.initialFrequency,
             amType: 'none',
             amDepth: 0,
@@ -43,9 +44,9 @@ class AutomatedDriver {
             channel.volume -= dVolume;
         }
 
-        // Safeguard: Linear function between 60% at 0 minutes and 100% at the end
-        const maxVolume = 60 + Math.min(40 * (elapsedMinutes / this.sessionDuration), 40);
-        channel.volume = Math.min(Math.max(channel.volume, 50), maxVolume);
+        // Safeguard: Linear function between startvol+10% at 0 minutes and 100% at the end
+        const maxVolume = this.startVolume + 10 + Math.min((90 - this.startVolume) * (elapsedMinutes / this.sessionDuration), (90 - this.startVolume));
+        channel.volume = Math.min(Math.max(channel.volume, this.startVolume), maxVolume);
         channel.volume = Math.round(channel.volume);
     }
 

@@ -10,6 +10,8 @@ const automatedDriverConfig = require('./automatedDriverConfig');
 
 const electronState = new ElectronState();
 
+app.use(express.urlencoded({ extended: false }));
+
 // set template engine
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
@@ -19,14 +21,56 @@ app.get('/', function (req, res) {
     res.render('index');
 });
 
-// start new automated driver
-app.get('/start-automated-driver/', function (req, res) {
+// actually start new automated driver
+app.post('/start-automated-driver', function (req, res) {
+    const minFrequency = parseInt(req.body['min-frequency']);
+    const maxFrequency = parseInt(req.body['max-frequency']);
+    const startFrequency = parseInt(req.body['start-frequency']);
+    const startVolume = parseInt(req.body['start-volume']);
+    const sessionDuration = parseInt(req.body['session-duration']);
     const sessId = generateAutomatedSessId();
-    if (electronState.startAutomatedDriver(sessId, automatedDriverConfig)) {
-        res.render('automated', { sessId: sessId, sessDuration: automatedDriverConfig.sessionDuration });
+
+    // Validate input values
+    if (
+        isNaN(minFrequency) ||
+        isNaN(maxFrequency) ||
+        isNaN(startFrequency) ||
+        isNaN(startVolume) ||
+        isNaN(sessionDuration) ||
+        minFrequency < 100 || minFrequency > 3000 ||
+        maxFrequency < 100 || maxFrequency > 3000 ||
+        startFrequency < 0 || startFrequency < minFrequency || startFrequency > maxFrequency ||
+        startVolume < 0 ||
+        sessionDuration < 30 || sessionDuration > 60 ||
+        minFrequency >= maxFrequency
+    ) {
+        return res.status(400).send('Invalid input values');
+    }
+
+    const sessionConfig = {
+        sessionDuration: sessionDuration,
+        startMaxVolumeChange: automatedDriverConfig.startMaxVolumeChange,
+        endMaxVolumeChange: automatedDriverConfig.endMaxVolumeChange,
+        minAMDepth: automatedDriverConfig.minAMDepth,
+        maxAMDepth: automatedDriverConfig.maxAMDepth,
+        noChangesProbability: automatedDriverConfig.noChangesProbability,
+        minFrequency: minFrequency,
+        maxFrequency: maxFrequency,
+        initialFrequency: startFrequency,
+        msBetweenUpdates: automatedDriverConfig.msBetweenUpdates,
+        startVolume: startVolume
+    };
+
+    if (electronState.startAutomatedDriver(sessId, sessionConfig)) {
+        res.render('automated', { sessId: sessId, sessDuration: sessionConfig.sessionDuration });
     } else {
         res.status(500).send('Failed to start automated driver');
     }
+});
+
+// set parameters for new automated driver
+app.get('/config-automated-driver', function (req, res) {
+    res.render('cfgautomated');
 });
 
 // player page
@@ -47,8 +91,8 @@ app.get('/player/:mode/:sessId', function (req, res) {
 });
 
 app.get("/favicon.ico", async (req, res) => {
-    res.status(200)
-    res.sendFile(__dirname + '/public/favicon.ico')
+    res.status(200);
+    res.sendFile(__dirname + '/public/favicon.ico');
 });
 
 io.on('connection', function (socket) {

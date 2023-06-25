@@ -222,6 +222,10 @@ h2 {
 	text-shadow: 0 0 18px #1E90FF;
 }
 
+.electron-title a {
+	text-decoration: none;
+}
+
 #session-id {
 	background: #FFF;
 	border: 1px solid #c5c5c5;

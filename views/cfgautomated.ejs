@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0>
+
+	<link href="https://fonts.googleapis.com/css?family=Titillium+Web:200" rel="stylesheet" type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=Cabin:400,500,700' rel='stylesheet' type='text/css'>
+	<link href='https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css' rel='stylesheet' type='text/css'
+		id='jqueryui-stylesheet'>
+	<link rel="stylesheet" href="/css/styles.css" id='local-stylesheet'>
+
+	<script src="https://code.jquery.com/jquery-2.2.4.min.js"
+		integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+		integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+	<script src="/js/themes.js"></script>
+
+	<title>e l e c t r o n</title>
+</head>
+
+<body>
+	<button onclick="toggleTheme()" id="theme-toggler">Toggle Theme</button>
+	<h1 class="electron-title"><a href="/">electron</a></h1>
+
+	<div id="main-container">
+		<div id="left-channel-column" style="margin:0;width:100%">
+			<div class="color-header">
+				<h2>Config Automated Session</h2>
+				<div style="clear:both;"></div>
+			</div>
+			<div class="content">
+				<form id="automated-session-form" method="post" action="/start-automated-driver">
+					<h3>Frequencies</h3>
+					<div class="form-row">
+						<label>Minimum Frequency</label>
+						<input name="min-frequency" value="1000" class="spinner-frequency"> Hz.
+					</div>
+					<div class="form-row">
+						<label>Maximum Frequency</label>
+						<input name="max-frequency" value="1500" class="spinner-frequency"> Hz.
+					</div>
+					<div class="form-row">
+						<label>Starting Frequency</label>
+						<input name="start-frequency" value="1250" class="spinner-frequency"> Hz.
+					</div>
+					<h3>Volume</h3>
+					<div class="form-row">
+						<label>Starting Volume</label>
+						<input name="start-volume" value="50" class="spinner-volume"> %
+					</div>
+					<h3>Duration</h3>
+					<div class="form-row">
+						<label>Session Duration</label>
+						<select name="session-duration">
+							<option value="30">30 minutes</option>
+							<option value="35">35 minutes</option>
+							<option value="40">40 minutes</option>
+							<option selected value="45">45 minutes</option>
+							<option value="50">50 minutes</option>
+							<option value="55">55 minutes</option>
+							<option value="60">60 minutes</option>
+						</select>
+					</div>
+					<button class="apply-btn" type="submit">Start Automated Session</button>
+				</form>
+			</div>
+		</div>
+		<div style="clear:both"></div>
+
+
+	</div>
+
+	<script src="/js/config.js"></script>
+	<script src="/js/automated.js"></script>
+
+</body>
+
+</html>

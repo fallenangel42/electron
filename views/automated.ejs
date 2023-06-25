@@ -20,14 +20,14 @@
 
 <body>
 	<button onclick="toggleTheme()" id="theme-toggler">Toggle Theme</button>
-	<h1 class="electron-title">electron</h1>
+	<h1 class="electron-title"><a href="/">electron</a></h1>
 
 	<div id="status-message">
 		You have initialized an automated session. Anyone can now join it by using the following session id:
 		<br><br>
 		<strong style="font-size: 150%;"><%= sessId %></strong>
 		<br><br>
-		Automated sessions on this server are set to last for <strong><%= sessDuration %> minutes</strong>.
+		The automated session will last for <strong><%= sessDuration %> minutes</strong>.
 		<br>
 		If no one joins within <strong>5 minutes</strong>, the session will be automatically terminated.
 		<br><br>
