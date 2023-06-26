@@ -152,6 +152,12 @@ h2 {
 	width: 230px;
 }
 
+.form-row .detailed-description {
+	font-size: 14px;
+	margin-left: 20px;
+	margin-top: 10px;
+}
+
 #sketch-holder-wrapper,
 #faq {
 	background: #FFF;
@@ -262,9 +268,9 @@ div#solo-session div {
 div#join-session div.home-btn-wrapper,
 div#new-session div.home-btn-wrapper,
 div#solo-session div.home-btn-wrapper {
-    height: 100px;
-    display: flex;
-    flex-direction: column-reverse;
+	height: 100px;
+	display: flex;
+	flex-direction: column-reverse;
 }
 
 div#join-session p,

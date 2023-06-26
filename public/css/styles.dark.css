@@ -152,6 +152,12 @@ h2 {
     width: 230px;
 }
 
+.form-row .detailed-description {
+    font-size: 14px;
+    margin-left: 20px;
+    margin-top: 10px;
+}
+
 #sketch-holder-wrapper,
 #faq {
     background: #303030;
@@ -230,7 +236,7 @@ h2 {
 }
 
 .electron-title a {
-	text-decoration: none;
+    text-decoration: none;
 }
 
 #session-id {

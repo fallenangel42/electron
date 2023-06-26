@@ -1,17 +1,17 @@
 class AutomatedDriver {
     constructor(sessId, config) {
         // read config
-        this.sessionDuration = config.sessionDuration || 60;
-        this.startMaxVolumeChange = config.startMaxVolumeChange || 2;
-        this.endMaxVolumeChange = config.endMaxVolumeChange || 5;
-        this.minAMDepth = config.minAMDepth || 2;
-        this.maxAMDepth = config.maxAMDepth || 5;
-        this.noChangesProbability = config.noChangesProbability || 0.25;
-        this.minFrequency = config.minFrequency || 1000;
-        this.maxFrequency = config.maxFrequency || 2000;
-        this.initialFrequency = config.initialFrequency || 1500;
-        this.msBetweenUpdates = config.msBetweenUpdates || 15000;
-        this.startVolume = config.startVolume || 50;
+        this.sessionDuration = config.sessionDuration;
+        this.startMaxVolumeChange = config.startMaxVolumeChange;
+        this.endMaxVolumeChange = config.endMaxVolumeChange;
+        this.minAMDepth = config.minAMDepth;
+        this.maxAMDepth = config.maxAMDepth;
+        this.noChangesProbability = config.noChangesProbability;
+        this.minFrequency = config.minFrequency;
+        this.maxFrequency = config.maxFrequency;
+        this.initialFrequency = config.initialFrequency;
+        this.msBetweenUpdates = config.msBetweenUpdates;
+        this.startVolume = config.startVolume;
 
         // set initial internal state
         this.inUse = false; // is anyone listening to this session?
@@ -126,7 +126,7 @@ class AutomatedDriver {
 
     processChannel(channel, channelName, elapsedMinutes, electronState) {
         this.updateVolume(channel, elapsedMinutes);
-        if (Math.random() < 0.3) {
+        if (Math.random() < 0.3 && this.minAMDepth > 0) {
             // 30% chance of making changes to the AM
             this.toggleAM(channel, elapsedMinutes);
         }

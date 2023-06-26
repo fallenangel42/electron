@@ -44,11 +44,28 @@
 					<div class="form-row">
 						<label>Starting Frequency</label>
 						<input name="start-frequency" value="1250" class="spinner-frequency"> Hz.
+						<div class="detailed-description">
+							Should be between minimum and maximum frequency values.
+						</div>
 					</div>
 					<h3>Volume</h3>
 					<div class="form-row">
 						<label>Starting Volume</label>
 						<input name="start-volume" value="50" class="spinner-volume"> %
+					</div>
+					<div class="form-row">
+						<label>Amplitude Modulation Preset</label>
+						<select name="am-preset">
+							<option value="0">No A.M.</option>
+							<option value="2">2% - 6%</option>
+							<option selected value="4">4% - 12%</option>
+							<option value="6">6% - 18%</option>
+							<option value="8">8% - 24%</option>
+							<option value="10">10% - 30%</option>
+						</select>
+						<div class="detailed-description">
+							Expressed as a % of volume, not used directly as A.M. Depth.
+						</div>
 					</div>
 					<h3>Duration</h3>
 					<div class="form-row">

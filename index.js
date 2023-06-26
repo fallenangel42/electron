@@ -27,6 +27,7 @@ app.post('/start-automated-driver', function (req, res) {
     const maxFrequency = parseInt(req.body['max-frequency']);
     const startFrequency = parseInt(req.body['start-frequency']);
     const startVolume = parseInt(req.body['start-volume']);
+    const amPreset = parseInt(req.body['am-preset']);
     const sessionDuration = parseInt(req.body['session-duration']);
     const sessId = generateAutomatedSessId();
 
@@ -36,11 +37,13 @@ app.post('/start-automated-driver', function (req, res) {
         isNaN(maxFrequency) ||
         isNaN(startFrequency) ||
         isNaN(startVolume) ||
+        isNaN(amPreset) ||
         isNaN(sessionDuration) ||
         minFrequency < 100 || minFrequency > 3000 ||
         maxFrequency < 100 || maxFrequency > 3000 ||
         startFrequency < 0 || startFrequency < minFrequency || startFrequency > maxFrequency ||
         startVolume < 0 ||
+        amPreset < 0 || amPreset > 10 ||
         sessionDuration < 30 || sessionDuration > 60 ||
         minFrequency >= maxFrequency
     ) {
@@ -51,8 +54,8 @@ app.post('/start-automated-driver', function (req, res) {
         sessionDuration: sessionDuration,
         startMaxVolumeChange: automatedDriverConfig.startMaxVolumeChange,
         endMaxVolumeChange: automatedDriverConfig.endMaxVolumeChange,
-        minAMDepth: automatedDriverConfig.minAMDepth,
-        maxAMDepth: automatedDriverConfig.maxAMDepth,
+        minAMDepth: amPreset,
+        maxAMDepth: amPreset * 3,
         noChangesProbability: automatedDriverConfig.noChangesProbability,
         minFrequency: minFrequency,
         maxFrequency: maxFrequency,
