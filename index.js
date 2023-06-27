@@ -43,7 +43,7 @@ app.post('/start-automated-driver', function (req, res) {
         maxFrequency < 100 || maxFrequency > 3000 ||
         startFrequency < 0 || startFrequency < minFrequency || startFrequency > maxFrequency ||
         startVolume < 0 ||
-        amPreset < 0 || amPreset > 10 ||
+        amPreset < 0 || amPreset > 20 ||
         sessionDuration < 30 || sessionDuration > 60 ||
         minFrequency >= maxFrequency
     ) {
