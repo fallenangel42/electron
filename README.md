@@ -26,6 +26,30 @@ If you choose to create a session, you will be given a unique session ID that yo
 
 In "solo" mode, users can experiment with waveform generation without sharing it with others. Simply select "play solo" from the homepage to begin.
 
+There is also a feature that allows users to set up an automated session driven by a simple AI.
+
+## Automated Driver Feature
+
+The application includes an Automated Driver feature that generates random changes in waveform parameters at specified intervals. This feature uses a configuration object to manage settings for the automated driver.
+
+Here's an example of the configuration object, which can be found in `automatedDriverConfig.js`:
+
+```javascript
+const automatedDriverConfig = {
+    startMaxVolumeChange: 2,
+    endMaxVolumeChange: 5,
+    noChangesProbability: 0.3,
+    msBetweenUpdates: 15000,
+};
+```
+
+The configuration parameters are as follows:
+
+- `startMaxVolumeChange`: The maximum volume change that will be allowed at the start of a session. Maximum volume changes are interpolated between `startMaxVolumeChange` and `endMaxVolumeChange` throughout the session. (default: 2).
+- `endMaxVolumeChange`: The maximum volume change that will be allowed at the end of a session. Maximum volume changes are interpolated between `startMaxVolumeChange` and `endMaxVolumeChange` throughout the session. (default: 5).
+- `noChangesProbability`: The probability of no changes occurring in the waveform parameters during an update interval. (default: 0.3).
+- `msBetweenUpdates`: The time in milliseconds between each update of the waveform parameters. (default: 15000).
+
 ## Contributing
 
 If you have any suggestions or improvements, feel free to open an issue or submit a pull request. However, note that I currently have limited time to dedicate to this project, so things will move very slowly.
