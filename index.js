@@ -1,35 +1,91 @@
 const express = require('express');
+const path = require('path');
 const app = require('express')();
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
 const PORT = process.env.PORT || 5000;
+const { generateToken, generateAutomatedSessId } = require('./utils');
+const ElectronState = require('./electronState');
+const automatedDriverConfig = require('./automatedDriverConfig');
 
-// generates the random token that only the driver of a session will
-// possess and will be used to authenticate their requests
-function generateToken() {
-    let text = '';
-    const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    for (let i = 0; i < 16; i++) {
-        text += possible.charAt(Math.floor(Math.random() * possible.length));
-    }
-    return text;
-}
+const electronState = new ElectronState();
+
+app.use(express.urlencoded({ extended: false }));
+
+// set template engine
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
 
 // home page
 app.get('/', function (req, res) {
-    res.sendFile(__dirname + '/html/index.html');
+    res.render('index');
+});
+
+// actually start new automated driver
+app.post('/start-automated-driver', function (req, res) {
+    const minFrequency = parseInt(req.body['min-frequency']);
+    const maxFrequency = parseInt(req.body['max-frequency']);
+    const startFrequency = parseInt(req.body['start-frequency']);
+    const startVolume = parseInt(req.body['start-volume']);
+    const amPreset = parseInt(req.body['am-preset']);
+    const sessionDuration = parseInt(req.body['session-duration']);
+    const sessId = generateAutomatedSessId();
+
+    // Validate input values
+    if (
+        isNaN(minFrequency) ||
+        isNaN(maxFrequency) ||
+        isNaN(startFrequency) ||
+        isNaN(startVolume) ||
+        isNaN(amPreset) ||
+        isNaN(sessionDuration) ||
+        minFrequency < 100 || minFrequency > 3000 ||
+        maxFrequency < 100 || maxFrequency > 3000 ||
+        startFrequency < 0 || startFrequency < minFrequency || startFrequency > maxFrequency ||
+        startVolume < 0 ||
+        amPreset < 0 || amPreset > 20 ||
+        sessionDuration < 30 || sessionDuration > 60 ||
+        minFrequency >= maxFrequency
+    ) {
+        return res.status(400).send('Invalid input values');
+    }
+
+    const sessionConfig = {
+        sessionDuration: sessionDuration,
+        startMaxVolumeChange: automatedDriverConfig.startMaxVolumeChange,
+        endMaxVolumeChange: automatedDriverConfig.endMaxVolumeChange,
+        minAMDepth: amPreset,
+        maxAMDepth: amPreset * 3,
+        noChangesProbability: automatedDriverConfig.noChangesProbability,
+        minFrequency: minFrequency,
+        maxFrequency: maxFrequency,
+        initialFrequency: startFrequency,
+        msBetweenUpdates: automatedDriverConfig.msBetweenUpdates,
+        startVolume: startVolume
+    };
+
+    if (electronState.startAutomatedDriver(sessId, sessionConfig)) {
+        res.render('automated', { sessId: sessId, sessDuration: sessionConfig.sessionDuration });
+    } else {
+        res.status(500).send('Failed to start automated driver');
+    }
+});
+
+// set parameters for new automated driver
+app.get('/config-automated-driver', function (req, res) {
+    res.render('cfgautomated');
 });
 
 // player page
 app.get('/player/:mode/:sessId', function (req, res) {
     const mode = req.params.mode;
     const sessId = req.params.sessId;
-    if ((mode == 'play' || mode == 'drive') && sessId.length == 10) {
+    if ((mode === 'play' || mode === 'drive') && sessId.length === 10) {
         // joining or driving a session
-        res.sendFile(__dirname + '/html/player.html');
-    } else if (mode == 'play' && sessId == 'solo') {
+        res.render('player');
+    } else if (mode === 'play' && sessId === 'solo') {
         // solo play
-        res.sendFile(__dirname + '/html/player.html');
+        res.render('player');
     } else {
         // something went wrong -> 404!
         res.status(404);
@@ -37,17 +93,16 @@ app.get('/player/:mode/:sessId', function (req, res) {
     }
 });
 
-// places to store the current state of the application
-// as we don't use a database of any kind (it's all in memory!)
-let driverTokens = {}; // stores the authentication tokens of drivers
-let riders = {};       // stores all sockets for people riding each session
-let lastMessages = {}; // storage of incoming messages (setting waveform parameters, pain tool, etc.)
+app.get("/favicon.ico", async (req, res) => {
+    res.status(200);
+    res.sendFile(__dirname + '/public/favicon.ico');
+});
 
 io.on('connection', function (socket) {
     console.log('User connected');
     socket.on('registerRider', function (msg) {
         const sessId = msg.sessId;
-        if (!(sessId in driverTokens)) {
+        if (!electronState.driverTokenExists(sessId)) {
             // this session doesn't exist, apparently
             socket.emit('riderRejected');
             console.log('User REJECTED as rider for ' + sessId);
@@ -56,25 +111,20 @@ io.on('connection', function (socket) {
 
         // store the socket for this new rider
         console.log('User APPROVED as rider for ' + sessId);
-        if (sessId in riders) {
-            riders[sessId].push(socket);
-        } else {
-            riders[sessId] = [];
-            riders[sessId].push(socket);
-        }
+        electronState.addRiderSocket(sessId, socket);
     });
 
     socket.on('requestLast', function (msg) {
+        // send the last status for the left & right channels so this new rider
+        // is synchronized with the current status
         const sessId = msg.sessId;
-        if (sessId in lastMessages && 'left' in lastMessages[sessId]) {
-            // send the last status for the left channel so this new rider
-            // is synchronized with the current status
-            socket.emit('left', lastMessages[sessId].left);
+        const lastLeft = electronState.getLastMessage(sessId, 'left');
+        const lastRight = electronState.getLastMessage(sessId, 'right');
+        if (lastLeft) {
+            socket.emit('left', lastLeft);
         }
-        if (sessId in lastMessages && 'right' in lastMessages[sessId]) {
-            // send the last status for the right channel so this new rider
-            // is synchronized with the current status
-            socket.emit('right', lastMessages[sessId].right);
+        if (lastRight) {
+            socket.emit('right', lastRight);
         }
     });
 
@@ -83,12 +133,11 @@ io.on('connection', function (socket) {
     socket.on('registerDriver', function (msg) {
         const sessId = msg.sessId;
         console.log('User registered as driver for ' + sessId);
-        if (!(sessId in driverTokens)) {
+        if (!electronState.driverTokenExists(sessId)) {
             const token = generateToken();
-            driverTokens[sessId] = token;
+            electronState.addDriverToken(sessId, token);
             socket.emit('driverToken', token);
             console.log('User APPROVED as driver for ' + sessId);
-            lastMessages[sessId] = {};
         } else {
             socket.emit('driverRejected');
             console.log('User REJECTED as driver for ' + sessId);
@@ -97,40 +146,36 @@ io.on('connection', function (socket) {
 
     // left channel updates... send them over to all riders
     socket.on('left', function (msg) {
-        if (!msg.sessId || !(msg.sessId in driverTokens) || msg.driverToken != driverTokens[msg.sessId]) {
+        if (!msg.sessId || !electronState.validateDriverToken(msg.sessId, msg.driverToken)) {
             return;
         }
 
         // store the current status of the left channel for the future
-        lastMessages[msg.sessId].left = msg;
+        electronState.storeLastMessage(msg.sessId, 'left', msg);
         // send real time updates to all riders
-        if (msg.sessId in riders) {
-            riders[msg.sessId].forEach(function (s) {
-                s.emit('left', msg);
-            });
-        }
+        electronState.getRiderSockets(msg.sessId).forEach(function (s) {
+            s.emit('left', msg);
+        });
     });
 
     // right channel updates... send them over to all riders
     socket.on('right', function (msg) {
-        if (!msg.sessId || !(msg.sessId in driverTokens) || msg.driverToken != driverTokens[msg.sessId]) {
+        if (!msg.sessId || !electronState.validateDriverToken(msg.sessId, msg.driverToken)) {
             return;
         }
 
         // store the current status of the right channel for the future
-        lastMessages[msg.sessId].right = msg;
+        electronState.storeLastMessage(msg.sessId, 'right', msg);
         // send real time updates to all riders
-        if (msg.sessId in riders) {
-            riders[msg.sessId].forEach(function (s) {
-                s.emit('right', msg);
-            });
-        }
+        electronState.getRiderSockets(msg.sessId).forEach(function (s) {
+            s.emit('right', msg);
+        });
     });
 
     // left pain tool updates... send them over to all riders
     socket.on('pain-left', function (msg) {
-        if (msg.sessId in riders && msg.driverToken == driverTokens[msg.sessId]) {
-            riders[msg.sessId].forEach(function (s) {
+        if (electronState.validateDriverToken(msg.sessId, msg.driverToken)) {
+            electronState.getRiderSockets(msg.sessId).forEach(function (s) {
                 s.emit('pain-left', msg);
             });
         }
@@ -138,8 +183,8 @@ io.on('connection', function (socket) {
 
     // right pain tool updates... send them over to all riders
     socket.on('pain-right', function (msg) {
-        if (msg.sessId in riders && msg.driverToken == driverTokens[msg.sessId]) {
-            riders[msg.sessId].forEach(function (s) {
+        if (electronState.validateDriverToken(msg.sessId, msg.driverToken)) {
+            electronState.getRiderSockets(msg.sessId).forEach(function (s) {
                 s.emit('pain-right', msg);
             });
         }
@@ -148,13 +193,7 @@ io.on('connection', function (socket) {
     // remove person from list of riders if they close the connection
     socket.on('disconnect', function () {
         console.log('User disconnected');
-        for (const sessId in riders) {
-            const index = riders[sessId].indexOf(socket);
-            if (index > -1) {
-                riders[sessId].splice(index, 1);
-                console.log('User removed from riders list successfully');
-            }
-        }
+        electronState.onDisconnect(socket);
     });
 });
 
