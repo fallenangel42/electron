@@ -70,11 +70,17 @@ function drawLissajous() {
 
     // Lissajous
     plotLength = Math.min(amplL.length, amplR.length);
-    stroke(lissajousColor);
     beginShape();
     for (let iLR = 0; iLR < plotLength; iLR++) {
-        let al = Math.min(Math.abs(leftOsc.getAmp() + amplL[iLR]), 1);
-        let ar = Math.min(Math.abs(rightOsc.getAmp() + amplR[iLR]), 1);
+        let ml = Math.abs(leftOsc.getAmp() + amplL[iLR]);
+        let mr = Math.abs(rightOsc.getAmp() + amplR[iLR]);
+        let al = Math.min(ml, 1);
+        let ar = Math.min(mr, 1);
+        if (ml > 1 || mr > 1) {
+            stroke('white');
+        } else {
+            stroke(lissajousColor);
+        }
         // NOTE: AM oscillators return nonzero values even if main oscillator not started
         if (!leftOsc.started) {
             al = leftOsc.getAmp();
