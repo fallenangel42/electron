@@ -103,6 +103,15 @@ module.exports = function (electronState) {
             }
         });
 
+        // ====== getRiderCount ======
+        // returns how many riders are currently connected to this session
+        socket.on('getRiderCount', function (msg) {
+            if (electronState.validateDriverToken(msg.sessId, msg.driverToken)) {
+                const riderSockets = electronState.getRiderSockets(msg.sessId);
+                socket.emit('riderCount', riderSockets.length);
+            }
+        });
+
         // ====== disconnect ======
         // remove person from list of riders if they close the connection
         socket.on('disconnect', function () {

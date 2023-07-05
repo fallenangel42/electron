@@ -82,6 +82,16 @@ $(function () {
             const line1 = 'Registered successfully on the network! Driving session with Session ID ' + sessId + '.';
             const line2 = 'Send the following link to the people you want to drive:<br>' + '<strong>' + link + '</strong>';
             $('#status-message').html(line1 + '<br>' + line2);
+
+            // initialize box that displays how many riders are connected and update it every 5 seconds
+            $('#rider-count').show();
+            setInterval(function () {
+                socket.emit('getRiderCount', { sessId: sessId, driverToken: driverToken });
+            }, 5000);
+
+            socket.on('riderCount', function (msg) {
+                $('#rider-count-number').text(msg);
+            });
         });
 
         socket.on('driverRejected', function () {

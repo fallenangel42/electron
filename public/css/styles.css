@@ -16,7 +16,8 @@ body {
 
 #main-container,
 #status-message,
-#initialize-audio {
+#initialize-audio,
+#rider-count {
 	background: #FFF;
 	border: 0;
 	border-radius: 5px;
@@ -26,7 +27,8 @@ body {
 }
 
 #status-message,
-#initialize-audio {
+#initialize-audio,
+#rider-count {
 	background: #e0e8ff;
 	border: 1px solid #555999;
 	color: #555999;

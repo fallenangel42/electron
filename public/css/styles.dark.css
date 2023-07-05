@@ -13,7 +13,8 @@ a {
 
 #main-container,
 #status-message,
-#initialize-audio {
+#initialize-audio,
+#rider-count {
     background: #303030;
     border: 0;
     border-radius: 5px;
@@ -23,7 +24,8 @@ a {
 }
 
 #status-message,
-#initialize-audio {
+#initialize-audio,
+#rider-count {
     background: #404040;
     border: 1px solid #888;
     color: #ccc;
