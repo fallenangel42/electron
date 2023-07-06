@@ -17,20 +17,16 @@ class AutomatedDriver {
         this.inUse = false; // is anyone listening to this session?
         this.sessId = sessId;
         this.startTime = new Date();
-        this.leftChannel = {
+        const defaultChannelState = {
             volume: this.startVolume,
             freq: this.initialFrequency,
             amType: 'none',
             amDepth: 0,
             amFreq: 0
         };
-        this.rightChannel = {
-            volume: this.startVolume,
-            freq: this.initialFrequency,
-            amType: 'none',
-            amDepth: 0,
-            amFreq: 0
-        };
+
+        this.leftChannel = { ...defaultChannelState };
+        this.rightChannel = { ...defaultChannelState };
     }
 
     updateVolume(channel, elapsedMinutes) {
