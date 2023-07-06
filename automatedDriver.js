@@ -1,17 +1,9 @@
 class AutomatedDriver {
     constructor(sessId, config) {
-        // read config
-        this.sessionDuration = config.sessionDuration;
-        this.startMaxVolumeChange = config.startMaxVolumeChange;
-        this.endMaxVolumeChange = config.endMaxVolumeChange;
-        this.minAMDepth = config.minAMDepth;
-        this.maxAMDepth = config.maxAMDepth;
-        this.noChangesProbability = config.noChangesProbability;
-        this.minFrequency = config.minFrequency;
-        this.maxFrequency = config.maxFrequency;
-        this.initialFrequency = config.initialFrequency;
-        this.msBetweenUpdates = config.msBetweenUpdates;
-        this.startVolume = config.startVolume;
+        // read all config values and transfer them as properties for this object
+        Object.entries(config).forEach(([key, value]) => {
+            this[key] = value;
+        });
 
         // set initial internal state
         this.inUse = false; // is anyone listening to this session?
@@ -121,6 +113,13 @@ class AutomatedDriver {
     }
 
     processChannel(channel, channelName, elapsedMinutes, electronState) {
+        // first, we consider the possibility of pain!
+        if (Math.random() < (this.painProbability * 0.01) && elapsedMinutes > 0) {
+            console.log(`Automated driver ${this.sessId} is sending PAIN signal to the ${channelName.toUpperCase()} channel`);
+            this.processPain(channel, channelName, electronState);
+            return;
+        }
+
         this.updateVolume(channel, elapsedMinutes);
         if (Math.random() < 0.3 && this.minAMDepth > 0) {
             // 30% chance of making changes to the AM
@@ -130,6 +129,20 @@ class AutomatedDriver {
         this.varyFrequency(channel);
         this.emitToRiders(channel, channelName, electronState);
         console.log(`Automated driver ${this.sessId} made changes to the ${channelName.toUpperCase()} channel. Elapsed minutes: ${elapsedMinutes.toFixed(2)}`);
+    }
+
+    processPain(channel, channelName, electronState) {
+        const msg = {
+            volume: Math.min(1.0, (channel.volume + this.painIntensity) * 0.01),
+            frequency: channel.freq,
+            shockDuration: Math.random(this.painMinShockLength, this.painMaxShockLength),
+            timeBetweenShocks: Math.random(this.painMinTimeBetweenShocks, this.painMaxTimeBetweenShocks),
+            numberOfShocks: Math.round(this.painMinShocks + Math.random() * (this.painMaxShocks - this.painMinShocks))
+        };
+
+        electronState.getRiderSockets(this.sessId).forEach(function (s) {
+            s.emit('pain-' + channelName, msg);
+        });
     }
 
     runActionsOnChannels(elapsedMinutes, electronState) {

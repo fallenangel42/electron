@@ -35,20 +35,21 @@ app.post('/start-automated-driver', function (req, res) {
     const startVolume = parseInt(req.body['start-volume']);
     const amPreset = parseInt(req.body['am-preset']);
     const sessionDuration = parseInt(req.body['session-duration']);
+    const painProbability = parseInt(req.body['pain-probability']);
+    const painIntensity = parseInt(req.body['pain-intensity']);
     const sessId = generateAutomatedSessId();
 
     const sessionConfig = {
         sessionDuration: sessionDuration,
-        startMaxVolumeChange: automatedDriverConfig.startMaxVolumeChange,
-        endMaxVolumeChange: automatedDriverConfig.endMaxVolumeChange,
         minAMDepth: amPreset,
         maxAMDepth: amPreset * 3,
-        noChangesProbability: automatedDriverConfig.noChangesProbability,
         minFrequency: minFrequency,
         maxFrequency: maxFrequency,
         initialFrequency: startFrequency,
-        msBetweenUpdates: automatedDriverConfig.msBetweenUpdates,
-        startVolume: startVolume
+        startVolume: startVolume,
+        painProbability: painProbability,
+        painIntensity: painIntensity,
+        ...automatedDriverConfig
     };
 
     if (electronState.startAutomatedDriver(sessId, sessionConfig)) {
