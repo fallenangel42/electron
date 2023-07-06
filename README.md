@@ -40,6 +40,12 @@ const automatedDriverConfig = {
     endMaxVolumeChange: 5,
     noChangesProbability: 0.3,
     msBetweenUpdates: 15000,
+    painMinShocks: 5,
+    painMaxShocks: 15,
+    painMinShockLength: 0.05,
+    painMaxShockLength: 0.5,
+    painMinTimeBetweenShocks: 0.2,
+    painMaxTimeBetweenShocks: 1.0
 };
 ```
 
@@ -49,6 +55,9 @@ The configuration parameters are as follows:
 - `endMaxVolumeChange`: The maximum volume change that will be allowed at the end of a session. Maximum volume changes are interpolated between `startMaxVolumeChange` and `endMaxVolumeChange` throughout the session. (default: 5).
 - `noChangesProbability`: The probability of no changes occurring in the waveform parameters during an update interval. (default: 0.3).
 - `msBetweenUpdates`: The time in milliseconds between each update of the waveform parameters. (default: 15000).
+- `painMinShocks` and `painMaxShocks`: How many shocks will be administered in one go when the optional pain feature kicks in.
+- `painMinShockLength` and `painMaxShockLength`: Length of each individual shock when the optional pain feature kicks in.
+- `painMinTimeBetweenShocks` and `painMaxTimeBetweenShocks`: Rest between each individual shock when the optional pain feature kicks in.
 
 ## Contributing
 
