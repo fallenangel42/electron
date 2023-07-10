@@ -7,17 +7,15 @@
 
 	<link href="https://fonts.googleapis.com/css?family=Titillium+Web:200" rel="stylesheet" type='text/css'>
 	<link href='https://fonts.googleapis.com/css?family=Cabin:400,500,700' rel='stylesheet' type='text/css'>
-	<link href='https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css' rel='stylesheet' type='text/css'
-		id='jqueryui-stylesheet'>
+	<link href='https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css' rel='stylesheet' type='text/css' id='jqueryui-stylesheet'>
 	<link rel="stylesheet" href="/css/styles.css" id='local-stylesheet'>
 
-	<script src="https://code.jquery.com/jquery-2.2.4.min.js"
-		integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
 	<script src="/js/themes.js"></script>
 	<script>
 		function convertSessionID() {
-			linkDiv = document.getElementById("linkText")
-			linkHref = document.getElementById("linkHref")
+			linkDiv = document.getElementById("link-text")
+			linkHref = document.getElementById("link-href")
 			sessionID = linkDiv.dataset.sessionid
 			host = window.location.origin
 
@@ -37,7 +35,7 @@
 	<div id="status-message">
 		You have initialized an automated session. Anyone can now join it by using the following session link:
 		<br><br>
-		<a id="linkHref"><strong style="font-size: 150%;" id="linkText" data-sessionid="<%= sessId %>"></strong></a>
+		<a id="link-href"><strong style="font-size: 150%;" id="link-text" data-sessionid="<%= sessId %>"></strong></a>
 		<br><br>
 		The automated session will last for <strong><%= sessDuration %> minutes</strong>.
 		<br>
