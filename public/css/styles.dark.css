@@ -274,12 +274,12 @@ h2 {
     width: 180px;
 }
 
-#modeSelectorContainer {
+#mode-selector-container {
 	display: inline-flex;
 	width: fit-content;
 }
 
-div.modeSelectorBox {
+div.mode-selector-box {
     background: #303030;
     border-radius: 5px;
     box-shadow: 0 -2px 3px rgba(0, 0, 0, 0.4) inset;
@@ -296,18 +296,18 @@ div.modeSelectorBox {
 	color:#a00;
 }
 
-div.modeSelectorBox div {
+div.mode-selector-box div {
     height: 190px;
 }
 
-div.modeSelectorBox div.home-btn-wrapper {
+div.mode-selector-box div.home-btn-wrapper {
 	height: fit-content;
 	display: flex;
 	flex-direction: column-reverse;
 	align-self: end;
 }
 
-div.modeSelectorBox p {
+div.mode-selector-box p {
     color: #888;
 }
 
