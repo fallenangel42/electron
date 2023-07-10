@@ -333,7 +333,7 @@ div.modeSelectorBox p {
     box-shadow: 0 5px 5px rgba(0, 0, 0, 0.25);
     color: #fff;
     cursor: pointer;
-    left: 20px;
+    right: 20px;
     outline: none;
     padding: 10px 20px;
     position: fixed;
