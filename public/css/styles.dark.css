@@ -48,16 +48,26 @@ a {
     width: 480px;
 }
 
-#left-channel-column div.color-header {
-    background: #03a9f4;
+div.color-header {
+	height: 40px;
     color: black;
     padding: 15px;
 }
 
+div.color-header h2 {
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+    width:fit-content;
+}
+
+#left-channel-column div.color-header {
+    background: #03a9f4;
+}
+
 #right-channel-column div.color-header {
     background: #8bc34a;
-    color: black;
-    padding: 15px;
 }
 
 #left-channel-column .content,
@@ -118,7 +128,8 @@ button.home-btn {
     border: 0;
     border-radius: 20px;
     box-shadow: 0 2px 3px rgba(0, 0, 0, 0.4);
-    color: black;
+    color: white;
+    letter-spacing: 0.5px;
     cursor: pointer;
     font-size: 18px;
     font-weight: 700;
@@ -126,6 +137,10 @@ button.home-btn {
     margin-top: 10px;
     padding: 10px 20px;
     width: 100%;
+}
+
+button.home-btn:hover {
+	background: #77a83e;
 }
 
 h2 {
@@ -137,7 +152,6 @@ h2 {
 .form-row {
     font-size: 16px;
     margin-bottom: 10px;
-    padding: 0 0 0 15px;
 }
 
 .form-row input,
@@ -160,8 +174,28 @@ h2 {
     margin-top: 10px;
 }
 
-#sketch-holder-wrapper,
-#faq {
+.footnotes {
+	background: #303030;
+    color: #ccc;
+	border-radius: 5px;
+	margin: auto;
+	margin-top:20px;
+	padding: 25px;
+	text-align: center;
+	width: 1010px;
+	box-shadow: 0 -2px 3px rgba(0, 0, 0, 0.4) inset;
+	text-align: left;
+}
+
+.footnotes h2 {
+	float: none;
+}
+
+.footnotes h2 span {
+	color: red;
+}
+
+#sketch-holder-wrapper {
     background: #303030;
     border-radius: 5px;
     margin: auto;
@@ -208,20 +242,6 @@ h2 {
     background-color: #444;
 }
 
-#faq {
-    box-shadow: 0 -2px 3px rgba(0, 0, 0, 0.4) inset;
-    text-align: left;
-}
-
-#faq h2 {
-    float: none;
-    margin-bottom: 30px;
-}
-
-#faq h2 span {
-    color: red;
-}
-
 #session-id {
     color: white;
 }
@@ -231,7 +251,7 @@ h2 {
     font-size: 64px;
     font-weight: 200;
     letter-spacing: .3em;
-    margin: 0;
+	margin-top: 30px;
     text-align: center;
     text-shadow: 0 0 5px #3EB0FF, 0 0 15px #3EB0FF;
     color: #3eB0FF;
@@ -239,6 +259,7 @@ h2 {
 
 .electron-title a {
     text-decoration: none;
+    color: #3eB0FF;
 }
 
 #session-id {
@@ -253,38 +274,40 @@ h2 {
     width: 180px;
 }
 
-div#join-session,
-div#new-session,
-div#solo-session {
+#modeSelectorContainer {
+	display: inline-flex;
+	width: fit-content;
+}
+
+div.modeSelectorBox {
     background: #303030;
     border-radius: 5px;
     box-shadow: 0 -2px 3px rgba(0, 0, 0, 0.4) inset;
     color: #ccc;
-    display: inline-grid;
-    height: 300px;
-    margin: 20px;
+	height: 300px;
+	display:inline-grid;
+	margin-inline: 10px;
     padding: 20px;
     text-align: center;
     width: 300px;
 }
 
-div#join-session div,
-div#new-session div,
-div#solo-session div {
+#join-session-warning-text {
+	color:#a00;
+}
+
+div.modeSelectorBox div {
     height: 190px;
 }
 
-div#join-session div.home-btn-wrapper,
-div#new-session div.home-btn-wrapper,
-div#solo-session div.home-btn-wrapper {
-    height: 100px;
-    display: flex;
-    flex-direction: column-reverse;
+div.modeSelectorBox div.home-btn-wrapper {
+	height: fit-content;
+	display: flex;
+	flex-direction: column-reverse;
+	align-self: end;
 }
 
-div#join-session p,
-div#new-session p,
-div#solo-session p {
+div.modeSelectorBox p {
     color: #888;
 }
 

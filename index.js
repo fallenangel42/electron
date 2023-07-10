@@ -81,12 +81,6 @@ app.get('/player/:mode/:sessId', function (req, res) {
     }
 });
 
-// favicon static route
-app.get("/favicon.ico", async (req, res) => {
-    res.status(200);
-    res.sendFile(__dirname + '/public/favicon.ico');
-});
-
 // assign callbacks to handle sockets, which is the core
 // of the remote driving functionality
 io.on('connection', socketHandler(electronState));
