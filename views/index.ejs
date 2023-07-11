@@ -7,12 +7,10 @@
 
   <link href="https://fonts.googleapis.com/css?family=Titillium+Web:200" rel="stylesheet" type='text/css'>
   <link href='https://fonts.googleapis.com/css?family=Cabin:400,500,700' rel='stylesheet' type='text/css'>
-  <link href='https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css' rel='stylesheet' type='text/css'
-    id='jqueryui-stylesheet'>
+  <link href='https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css' rel='stylesheet' type='text/css' id='jqueryui-stylesheet'>
   <link rel="stylesheet" href="/css/styles.css" id='local-stylesheet'>
 
-  <script src="https://code.jquery.com/jquery-2.2.4.min.js"
-    integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
   <script src="/js/home.js"></script>
   <script src="/js/themes.js"></script>
 
@@ -24,48 +22,47 @@
 
   <h1 class="electron-title">electron</h1>
   <div style="width: 100%; text-align: center;">
-    <div id="join-session">
-      <div>
-        <h1>Join Session</h1>
-        <p>Join an existing session created by a driver using the Session ID provided by them.</p>
-        <div class="form-row">
-          <input type="text" id="session-id" maxlength="10" placeholder="Session ID">
+    <div id="mode-selector-container">
+      <div id="join-session" class="mode-selector-box">
+        <div>
+          <h1>Join Session</h1>
+          <p>Join an existing session created by a driver using the Session ID provided by them.</p>
+          <div class="form-row">
+            <input type="text" id="session-id" maxlength="10" placeholder="Session ID" onkeyup="resetWarning();">
+          </div>
+        </div>
+        <p id="join-session-warning-text" style="display:none">That session does not exist!</p>
+        <div class="home-btn-wrapper">
+          <button class="home-btn" onclick="checkSessionID($('#session-id').val())">Join Session</button>
         </div>
       </div>
-      <div class="home-btn-wrapper">
-        <button class="home-btn" onclick="window.location='/player/play/' + $('#session-id').val()">Join Session</button>
+
+      <div id="new-session" class="mode-selector-box">
+        <div>
+          <h1>Create Session</h1>
+          <p>Create a new session where you are the driver and other people can join as riders, or a session driven automatically by an AI.</p>
+        </div>
+        <div class="home-btn-wrapper">
+          <button class="home-btn" onclick="window.location='/config-automated-driver/'">Create Automated Session</button>
+          <button class="home-btn" onclick="window.location='/player/drive/' + generateSessionId()">Create Normal Session</button>
+        </div>
+      </div>
+
+      <div id="solo-session" class="mode-selector-box">
+        <div>
+          <h1>Solo Mode</h1>
+          <p>Use the electron waveform generator playing on your own, without driving or being driven.</p>
+        </div>
+        <div class="home-btn-wrapper">
+          <button class="home-btn" onclick="window.location='/player/play/solo/'">Play Solo</button>
+        </div>
       </div>
     </div>
 
-    <div id="new-session">
-      <div>
-        <h1>Create Session</h1>
-        <p>Create a new session where you are the driver and other people can join as riders, or a session driven automatically by an AI.</p>
-      </div>
-      <div class="home-btn-wrapper">
-        <button class="home-btn" onclick="window.location='/config-automated-driver/'">Create Automated Session</button>
-        <button class="home-btn" onclick="window.location='/player/drive/' + generateSessionId()">Create Normal Session</button>
-      </div>
-    </div>
-
-    <div id="solo-session">
-      <div>
-        <h1>Solo Mode</h1>
-        <p>Use the electron waveform generator playing on your own, without driving or being driven.</p>
-      </div>
-      <div class="home-btn-wrapper">
-        <button class="home-btn" onclick="window.location='/player/play/solo/'">Play Solo</button>
-      </div>
-    </div>
-
-    <div style="clear:both"></div>
-
-    <div id="faq">
-      <h2>Frequently Asked Questions <span>(please read if you are new here!)</span></h2>
-      <div>
-        <a href="#" onclick="$('#faq-content').show(300); $(this).hide(300)">Click here to show F.A.Q.</a>
-      </div>
-      <div style="display:none" id="faq-content">
+    <div id="faq" class="footnotes">
+      <h2 style="cursor:pointer;" onclick="document.getElementById('faq-content').style.maxHeight='2000px'">Frequently Asked Questions <span>(please read if you are new here!)</span></h2>
+      <div style="max-height: 0; overflow: hidden; transition: max-height 500ms ease-in-out;" id="faq-content">
+        <br>
         <ol>
           <li>
             <strong>What is electron exactly?</strong>
@@ -139,8 +136,16 @@
             </p>
           </li>
         </ol>
+        <button class="home-btn" style="margin-bottom: 10px;" onclick="document.getElementById('faq-content').style.maxHeight='0'">Click here to close the FAQ</button>
       </div>
     </div>
+
+    <div class="footnotes" style="display:none;">
+      <h2>Example Footnotes</h2>
+      <p>This is an example of what footnotes could look like in code. By removing the <a href="#">display:none;</a> attribute, you can add whatever you need to and it will be styled cohesively with the rest of electron.</p>
+      <p>You can add as many as you need by copying and pasting this div below this one.</p>
+    </div>
+
   </div>
 </body>
 
