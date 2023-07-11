@@ -128,8 +128,8 @@ button.home-btn {
 	border: 0;
 	border-radius: 20px;
 	box-shadow: 0 2px 3px rgba(0, 0, 0, 0.4);
-    color: white;
-    letter-spacing: 0.5px;
+	color: white;
+	letter-spacing: 0.5px;
 	cursor: pointer;
 	font-size: 18px;
 	font-weight: 700;
@@ -179,7 +179,7 @@ h2 {
 	background: #FFF;
 	border-radius: 5px;
 	margin: auto;
-	margin-top:20px;
+	margin-top: 20px;
 	padding: 25px;
 	text-align: center;
 	width: 1010px;
@@ -252,7 +252,7 @@ h2 {
 
 .electron-title a {
 	text-decoration: none;
-	color:black;
+	color: black;
 }
 
 #session-id {
@@ -278,7 +278,7 @@ div.mode-selector-box {
 	box-shadow: 0 -2px 3px rgba(0, 0, 0, 0.4) inset;
 	color: #333;
 	height: 300px;
-	display:inline-grid;
+	display: inline-grid;
 	margin-inline: 10px;
 	padding: 20px;
 	text-align: center;
@@ -286,7 +286,7 @@ div.mode-selector-box {
 }
 
 #join-session-warning-text {
-	color:#a00;
+	color: #a00;
 }
 
 div.mode-selector-box div {

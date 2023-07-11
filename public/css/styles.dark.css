@@ -49,17 +49,17 @@ a {
 }
 
 div.color-header {
-	height: 40px;
+    height: 40px;
     color: black;
     padding: 15px;
 }
 
 div.color-header h2 {
-	height: 100%;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-    width:fit-content;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: fit-content;
 }
 
 #left-channel-column div.color-header {
@@ -140,7 +140,7 @@ button.home-btn {
 }
 
 button.home-btn:hover {
-	background: #77a83e;
+    background: #77a83e;
 }
 
 h2 {
@@ -175,24 +175,24 @@ h2 {
 }
 
 .footnotes {
-	background: #303030;
+    background: #303030;
     color: #ccc;
-	border-radius: 5px;
-	margin: auto;
-	margin-top:20px;
-	padding: 25px;
-	text-align: center;
-	width: 1010px;
-	box-shadow: 0 -2px 3px rgba(0, 0, 0, 0.4) inset;
-	text-align: left;
+    border-radius: 5px;
+    margin: auto;
+    margin-top: 20px;
+    padding: 25px;
+    text-align: center;
+    width: 1010px;
+    box-shadow: 0 -2px 3px rgba(0, 0, 0, 0.4) inset;
+    text-align: left;
 }
 
 .footnotes h2 {
-	float: none;
+    float: none;
 }
 
 .footnotes h2 span {
-	color: red;
+    color: red;
 }
 
 #sketch-holder-wrapper {
@@ -251,7 +251,7 @@ h2 {
     font-size: 64px;
     font-weight: 200;
     letter-spacing: .3em;
-	margin-top: 30px;
+    margin-top: 30px;
     text-align: center;
     text-shadow: 0 0 5px #3EB0FF, 0 0 15px #3EB0FF;
     color: #3eB0FF;
@@ -275,8 +275,8 @@ h2 {
 }
 
 #mode-selector-container {
-	display: inline-flex;
-	width: fit-content;
+    display: inline-flex;
+    width: fit-content;
 }
 
 div.mode-selector-box {
@@ -284,16 +284,16 @@ div.mode-selector-box {
     border-radius: 5px;
     box-shadow: 0 -2px 3px rgba(0, 0, 0, 0.4) inset;
     color: #ccc;
-	height: 300px;
-	display:inline-grid;
-	margin-inline: 10px;
+    height: 300px;
+    display: inline-grid;
+    margin-inline: 10px;
     padding: 20px;
     text-align: center;
     width: 300px;
 }
 
 #join-session-warning-text {
-	color:#a00;
+    color: #a00;
 }
 
 div.mode-selector-box div {
@@ -301,10 +301,10 @@ div.mode-selector-box div {
 }
 
 div.mode-selector-box div.home-btn-wrapper {
-	height: fit-content;
-	display: flex;
-	flex-direction: column-reverse;
-	align-self: end;
+    height: fit-content;
+    display: flex;
+    flex-direction: column-reverse;
+    align-self: end;
 }
 
 div.mode-selector-box p {
