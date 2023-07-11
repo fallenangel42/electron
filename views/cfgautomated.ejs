@@ -2,120 +2,117 @@
 <html>
 
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0>
+  <meta charset="utf-8">
+  <meta name="viewport" width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0>
 
-	<link href="https://fonts.googleapis.com/css?family=Titillium+Web:200" rel="stylesheet" type='text/css'>
-	<link href='https://fonts.googleapis.com/css?family=Cabin:400,500,700' rel='stylesheet' type='text/css'>
-	<link href='https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css' rel='stylesheet' type='text/css'
-		id='jqueryui-stylesheet'>
-	<link rel="stylesheet" href="/css/styles.css" id='local-stylesheet'>
+  <link href="https://fonts.googleapis.com/css?family=Titillium+Web:200" rel="stylesheet" type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Cabin:400,500,700' rel='stylesheet' type='text/css'>
+  <link href='https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css' rel='stylesheet' type='text/css' id='jqueryui-stylesheet'>
+  <link rel="stylesheet" href="/css/styles.css" id='local-stylesheet'>
 
-	<script src="https://code.jquery.com/jquery-2.2.4.min.js"
-		integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
-	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
-		integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
-	<script src="/js/themes.js"></script>
+  <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+  <script src="/js/themes.js"></script>
 
-	<title>e l e c t r o n</title>
+  <title>e l e c t r o n</title>
 </head>
 
 <body>
-	<button onclick="toggleTheme()" id="theme-toggler">Toggle Theme</button>
-	<h1 class="electron-title"><a href="/">electron</a></h1>
+  <button onclick="toggleTheme()" id="theme-toggler">Toggle Theme</button>
+  <h1 class="electron-title"><a href="/">electron</a></h1>
 
-	<div id="main-container">
-		<div id="left-channel-column" style="margin:0;width:100%">
-			<div class="color-header">
-				<h2>Config Automated Session</h2>
-				<div style="clear:both;"></div>
-			</div>
-			<div class="content">
-				<form id="automated-session-form" method="post" action="/start-automated-driver">
-					<h3>Frequencies</h3>
-					<div class="form-row">
-						<label>Minimum Frequency</label>
-						<input name="min-frequency" value="1000" class="spinner-frequency"> Hz.
-					</div>
-					<div class="form-row">
-						<label>Maximum Frequency</label>
-						<input name="max-frequency" value="1500" class="spinner-frequency"> Hz.
-					</div>
-					<div class="form-row">
-						<label>Starting Frequency</label>
-						<input name="start-frequency" value="1250" class="spinner-frequency"> Hz.
-						<div class="detailed-description">
-							Should be between minimum and maximum frequency values.
-						</div>
-					</div>
-					<h3>Volume</h3>
-					<div class="form-row">
-						<label>Starting Volume</label>
-						<input name="start-volume" value="50" class="spinner-volume"> %
-					</div>
-					<div class="form-row">
-						<label>Amplitude Modulation Preset</label>
-						<select name="am-preset">
-							<option value="0">No A.M.</option>
-							<option value="2">2% - 6%</option>
-							<option selected value="4">4% - 12%</option>
-							<option value="6">6% - 18%</option>
-							<option value="8">8% - 24%</option>
-							<option value="10">10% - 30%</option>
-							<option value="12">12% - 36%</option>
-							<option value="14">14% - 42%</option>
-							<option value="16">16% - 48%</option>
-							<option value="18">18% - 54%</option>
-							<option value="20">20% - 60%</option>
-						</select>
-						<div class="detailed-description">
-							Expressed as a % of volume, not used directly as A.M. Depth.
-						</div>
-					</div>
-					<h3>Duration</h3>
-					<div class="form-row">
-						<label>Session Duration</label>
-						<select name="session-duration">
-							<option value="30">30 minutes</option>
-							<option value="35">35 minutes</option>
-							<option value="40">40 minutes</option>
-							<option selected value="45">45 minutes</option>
-							<option value="50">50 minutes</option>
-							<option value="55">55 minutes</option>
-							<option value="60">60 minutes</option>
-						</select>
-					</div>
-					<h3>Pain</h3>
-					<div class="form-row">
-						<label>Pain probability</label>
-						<select name="pain-probability">
-							<option selected value="0">None</option>
-							<option value="5">Low</option>
-							<option value="10">Medium</option>
-							<option value="20">High</option>
-							<option value="30">Very high</option>
-						</select>
-					</div>
-					<div class="form-row">
-						<label>Pain intensity</label>
-						<select name="pain-intensity">
-							<option selected value="4">Low</option>
-							<option value="8">Medium</option>
-							<option value="10">High</option>
-							<option value="15">Very high</option>
-						</select>
-					</div>
-					<button class="apply-btn" type="submit">Start Automated Session</button>
-				</form>
-			</div>
-		</div>
-		<div style="clear:both"></div>
+  <div id="main-container">
+    <div id="left-channel-column" style="margin:0;width:100%">
+      <div class="color-header">
+        <h2>Config Automated Session</h2>
+        <div style="clear:both;"></div>
+      </div>
+      <div class="content">
+        <form id="automated-session-form" method="post" action="/start-automated-driver">
+          <h3>Frequencies</h3>
+          <div class="form-row">
+            <label>Minimum Frequency</label>
+            <input name="min-frequency" value="1000" class="spinner-frequency"> Hz.
+          </div>
+          <div class="form-row">
+            <label>Maximum Frequency</label>
+            <input name="max-frequency" value="1500" class="spinner-frequency"> Hz.
+          </div>
+          <div class="form-row">
+            <label>Starting Frequency</label>
+            <input name="start-frequency" value="1250" class="spinner-frequency"> Hz.
+            <div class="detailed-description">
+              Should be between minimum and maximum frequency values.
+            </div>
+          </div>
+          <h3>Volume</h3>
+          <div class="form-row">
+            <label>Starting Volume</label>
+            <input name="start-volume" value="50" class="spinner-volume"> %
+          </div>
+          <div class="form-row">
+            <label>Amplitude Modulation Preset</label>
+            <select name="am-preset">
+              <option value="0">No A.M.</option>
+              <option value="2">2% - 6%</option>
+              <option selected value="4">4% - 12%</option>
+              <option value="6">6% - 18%</option>
+              <option value="8">8% - 24%</option>
+              <option value="10">10% - 30%</option>
+              <option value="12">12% - 36%</option>
+              <option value="14">14% - 42%</option>
+              <option value="16">16% - 48%</option>
+              <option value="18">18% - 54%</option>
+              <option value="20">20% - 60%</option>
+            </select>
+            <div class="detailed-description">
+              Expressed as a % of volume, not used directly as A.M. Depth.
+            </div>
+          </div>
+          <h3>Duration</h3>
+          <div class="form-row">
+            <label>Session Duration</label>
+            <select name="session-duration">
+              <option value="30">30 minutes</option>
+              <option value="35">35 minutes</option>
+              <option value="40">40 minutes</option>
+              <option selected value="45">45 minutes</option>
+              <option value="50">50 minutes</option>
+              <option value="55">55 minutes</option>
+              <option value="60">60 minutes</option>
+            </select>
+          </div>
+          <h3>Pain</h3>
+          <div class="form-row">
+            <label>Pain probability</label>
+            <select name="pain-probability">
+              <option selected value="0">None</option>
+              <option value="5">Low</option>
+              <option value="10">Medium</option>
+              <option value="20">High</option>
+              <option value="30">Very high</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <label>Pain intensity</label>
+            <select name="pain-intensity">
+              <option selected value="4">Low</option>
+              <option value="8">Medium</option>
+              <option value="10">High</option>
+              <option value="15">Very high</option>
+            </select>
+          </div>
+          <button class="apply-btn" type="submit">Start Automated Session</button>
+        </form>
+      </div>
+    </div>
+    <div style="clear:both"></div>
 
 
-	</div>
+  </div>
 
-	<script src="/js/config.js"></script>
-	<script src="/js/automated.js"></script>
+  <script src="/js/config.js"></script>
+  <script src="/js/automated.js"></script>
 
 </body>
 

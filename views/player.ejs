@@ -2,204 +2,192 @@
 <html>
 
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0>
+  <meta charset="utf-8">
+  <meta name="viewport" width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0>
 
-	<link href="https://fonts.googleapis.com/css?family=Titillium+Web:200" rel="stylesheet" type='text/css'>
-	<link href='https://fonts.googleapis.com/css?family=Cabin:400,500,700' rel='stylesheet' type='text/css'>
-	<link href='https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css' rel='stylesheet' type='text/css' id='jqueryui-stylesheet'>
-	<link rel="stylesheet" href="/css/styles.css" id='local-stylesheet'>
+  <link href="https://fonts.googleapis.com/css?family=Titillium+Web:200" rel="stylesheet" type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Cabin:400,500,700' rel='stylesheet' type='text/css'>
+  <link href='https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css' rel='stylesheet' type='text/css' id='jqueryui-stylesheet'>
+  <link rel="stylesheet" href="/css/styles.css" id='local-stylesheet'>
 
-	<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
-	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
-	<script src="/socket.io/socket.io.js"></script>
-	<script src="/js/p5.min.js"></script>
-	<script src="/js/addons/p5.dom.min.js"></script>
-	<script src="/js/addons/p5.sound.min.js"></script>
-	<script src="/js/visualization.lissajous.js"></script>
-	<script src="/js/visualization.spectrum.js"></script>
-	<script src="/js/visualization.vumeter.js"></script>
-	<script src="/js/visualization.waveform.js"></script>
-	<script src="/js/sketch.js"></script>
-	<script src="/js/themes.js"></script>
+  <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/js/p5.min.js"></script>
+  <script src="/js/addons/p5.dom.min.js"></script>
+  <script src="/js/addons/p5.sound.min.js"></script>
+  <script src="/js/visualization.lissajous.js"></script>
+  <script src="/js/visualization.spectrum.js"></script>
+  <script src="/js/visualization.vumeter.js"></script>
+  <script src="/js/visualization.waveform.js"></script>
+  <script src="/js/sketch.js"></script>
+  <script src="/js/themes.js"></script>
 
-	<title>e l e c t r o n</title>
+  <title>e l e c t r o n</title>
 </head>
 
 <body>
-	<button onclick="toggleTheme()" id="theme-toggler">Toggle Theme</button>
-	<h1 class="electron-title"><a href="/">electron</a></h1>
+  <button onclick="toggleTheme()" id="theme-toggler">Toggle Theme</button>
+  <h1 class="electron-title"><a href="/">electron</a></h1>
 
-	<div id="status-message">
-		Welcome to electron! You are currently playing in «solo mode».
-	</div>
+  <div id="status-message">
+    Welcome to electron! You are currently playing in «solo mode».
+  </div>
 
-	<div style="display:none;" id="rider-count">
-		Number of connected riders: <strong id="rider-count-number">0</strong>
-	</div>
+  <div style="display:none;" id="rider-count">
+    Number of connected riders: <strong id="rider-count-number">0</strong>
+  </div>
 
-	<div style="display:none;" id="initialize-audio">
-		<a href="#">Click here to start audio output for this session</a>
-	</div>
+  <div style="display:none;" id="initialize-audio">
+    <a href="#">Click here to start audio output for this session</a>
+  </div>
 
-	<div id="main-container">
+  <div id="main-container">
 
-		<div id="left-channel-column">
-			<div class="color-header">
-				<h2>Left Channel</h2>
-				<button class="stop-btn">STOP [Esc]</button>
-				<div style="clear:both;"></div>
-			</div>
-			<div class="content">
-				<h3>Basic Parameters</h3>
-				<div class="form-row">
-					<label title="How intense the signal is, from 0% to 100%." style="cursor:help">Volume</label>
-					<input name="volume" value="50" class="spinner-volume"> %
-				</div>
-				<div class="form-row">
-					<div class="slider-wrapper" data-target-field="volume" data-slider-type="volume"></div>
-				</div>
-				<div class="form-row">
-					<label
-						title="The number of times per second the wave oscillates. Higher values usually feel smoother and lower values feel harsher."
-						style="cursor:help">Frequency</label>
-					<input name="frequency" value="2000" class="spinner-frequency"> Hz.
-				</div>
-				<div class="form-row">
-					<div class="slider-wrapper" data-target-field="frequency" data-slider-type="frequency"></div>
-				</div>
+    <div id="left-channel-column">
+      <div class="color-header">
+        <h2>Left Channel</h2>
+        <button class="stop-btn">STOP [Esc]</button>
+        <div style="clear:both;"></div>
+      </div>
+      <div class="content">
+        <h3>Basic Parameters</h3>
+        <div class="form-row">
+          <label title="How intense the signal is, from 0% to 100%." style="cursor:help">Volume</label>
+          <input name="volume" value="50" class="spinner-volume"> %
+        </div>
+        <div class="form-row">
+          <div class="slider-wrapper" data-target-field="volume" data-slider-type="volume"></div>
+        </div>
+        <div class="form-row">
+          <label title="The number of times per second the wave oscillates. Higher values usually feel smoother and lower values feel harsher." style="cursor:help">Frequency</label>
+          <input name="frequency" value="2000" class="spinner-frequency"> Hz.
+        </div>
+        <div class="form-row">
+          <div class="slider-wrapper" data-target-field="frequency" data-slider-type="frequency"></div>
+        </div>
 
-				<h3>Volume Ramp</h3>
-				<div class="form-row">
-					<label title="The volume will automatically change until this value is reached."
-						style="cursor:help">Target Volume</label>
-					<input name="ramp-target" value="50" class="spinner-volume"> %
-				</div>
-				<div class="form-row">
-					<label
-						title="The number of percentage points per second the volume will actually change. For example if you set target volume at 60% and change rate to 1% / sec when the current volume is 50%, the ramp will take 10 seconds to complete."
-						style="cursor:help">Change Rate (% per second)</label>
-					<input name="ramp-rate" value="0" class="spinner-change-rate"> %/sec
-				</div>
+        <h3>Volume Ramp</h3>
+        <div class="form-row">
+          <label title="The volume will automatically change until this value is reached." style="cursor:help">Target Volume</label>
+          <input name="ramp-target" value="50" class="spinner-volume"> %
+        </div>
+        <div class="form-row">
+          <label title="The number of percentage points per second the volume will actually change. For example if you set target volume at 60% and change rate to 1% / sec when the current volume is 50%, the ramp will take 10 seconds to complete." style="cursor:help">Change Rate (% per second)</label>
+          <input name="ramp-rate" value="0" class="spinner-change-rate"> %/sec
+        </div>
 
-				<h3>Amplitude Modulation</h3>
-				<div class="form-row">
-					<label title="The type of waveform to use for amplitude (volume) modulation."
-						style="cursor:help">A.M. Type</label>
-					<select name="am-type">
-						<option value="none">None</option>
-						<option value="sine">Sine</option>
-						<option value="sawtooth">Sawtooth</option>
-						<option value="square">Square</option>
-						<option value="triangle">Triangle</option>
-					</select>
-				</div>
-				<div class="form-row">
-					<label title="How many times per second the amplitude (volume) modulation will be performed."
-						style="cursor:help">A.M. Frequency</label>
-					<input name="am-frequency" value="0" class="spinner-change-rate"> Hz.
-				</div>
-				<div class="form-row">
-					<label
-						title="How many percentage points the amplitude (volume) will be altered by in each cycle. For example, if your current volume is 75% and you set the A.M. Depth to 5% the volume will oscillate between 70% and 80%."
-						style="cursor:help">A.M. Depth</label>
-					<input name="am-depth" value="10" class="spinner-change-rate"> %
-				</div>
+        <h3>Amplitude Modulation</h3>
+        <div class="form-row">
+          <label title="The type of waveform to use for amplitude (volume) modulation." style="cursor:help">A.M. Type</label>
+          <select name="am-type">
+            <option value="none">None</option>
+            <option value="sine">Sine</option>
+            <option value="sawtooth">Sawtooth</option>
+            <option value="square">Square</option>
+            <option value="triangle">Triangle</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <label title="How many times per second the amplitude (volume) modulation will be performed." style="cursor:help">A.M. Frequency</label>
+          <input name="am-frequency" value="0" class="spinner-change-rate"> Hz.
+        </div>
+        <div class="form-row">
+          <label title="How many percentage points the amplitude (volume) will be altered by in each cycle. For example, if your current volume is 75% and you set the A.M. Depth to 5% the volume will oscillate between 70% and 80%." style="cursor:help">A.M. Depth</label>
+          <input name="am-depth" value="10" class="spinner-change-rate"> %
+        </div>
 
-				<h3>Frequency Modulation</h3>
-				<div class="form-row">
-					<label title="The type of waveform to use for frequency modulation." style="cursor:help">F.M.
-						Type</label>
-					<select name="fm-type">
-						<option value="none">None</option>
-						<option value="sine">Sine</option>
-						<option value="sawtooth">Sawtooth</option>
-						<option value="square">Square</option>
-						<option value="triangle">Triangle</option>
-					</select>
-				</div>
-				<div class="form-row">
-					<label title="How many times per second the frequency modulation will be performed."
-						style="cursor:help">F.M. Frequency</label>
-					<input name="fm-frequency" value="0" class="spinner-change-rate"> Hz.
-				</div>
-				<div class="form-row">
-					<label
-						title="How many hertz the frequency will be altered by in each cycle. For example, if your current frequency is 2000 Hz and you set the F.M. Depth to 50 Hz the frequency will oscillate between 1950 and 2050 Hz."
-						style="cursor:help">F.M. Depth</label>
-					<input name="fm-depth" value="10" class="spinner-change-rate"> Hz.
-				</div>
+        <h3>Frequency Modulation</h3>
+        <div class="form-row">
+          <label title="The type of waveform to use for frequency modulation." style="cursor:help">F.M.
+            Type</label>
+          <select name="fm-type">
+            <option value="none">None</option>
+            <option value="sine">Sine</option>
+            <option value="sawtooth">Sawtooth</option>
+            <option value="square">Square</option>
+            <option value="triangle">Triangle</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <label title="How many times per second the frequency modulation will be performed." style="cursor:help">F.M. Frequency</label>
+          <input name="fm-frequency" value="0" class="spinner-change-rate"> Hz.
+        </div>
+        <div class="form-row">
+          <label title="How many hertz the frequency will be altered by in each cycle. For example, if your current frequency is 2000 Hz and you set the F.M. Depth to 50 Hz the frequency will oscillate between 1950 and 2050 Hz." style="cursor:help">F.M. Depth</label>
+          <input name="fm-depth" value="10" class="spinner-change-rate"> Hz.
+        </div>
 
-				<button class="pain-btn">Pain Tool</button>
-				<button class="apply-btn">Apply [Return] ›</button>
-			</div>
-		</div>
-		<div id="right-channel-column">
-			<div class="color-header">
-				<h2>Right Channel</h2>
-				<button class="stop-btn">STOP [Esc]</button>
-				<div style="clear:both;"></div>
-			</div>
-		</div>
+        <button class="pain-btn">Pain Tool</button>
+        <button class="apply-btn">Apply [Return] ›</button>
+      </div>
+    </div>
+    <div id="right-channel-column">
+      <div class="color-header">
+        <h2>Right Channel</h2>
+        <button class="stop-btn">STOP [Esc]</button>
+        <div style="clear:both;"></div>
+      </div>
+    </div>
 
 
-		<div style="clear:both"></div>
-	</div>
+    <div style="clear:both"></div>
+  </div>
 
-	<div id="sketch-holder-wrapper">
-		<div class="tab">
-			<button class="tablinks active" onclick="selectVisualization(event, 'Waveform')">Waveform</button>
-			<button class="tablinks" onclick="selectVisualization(event, 'VU Meter')">VU Meter</button>
-			<button class="tablinks" onclick="selectVisualization(event, 'Spectrum')">Spectrum</button>
-			<button class="tablinks" onclick="selectVisualization(event, 'Lissajous')">Lissajous</button>
-		</div>
+  <div id="sketch-holder-wrapper">
+    <div class="tab">
+      <button class="tablinks active" onclick="selectVisualization(event, 'Waveform')">Waveform</button>
+      <button class="tablinks" onclick="selectVisualization(event, 'VU Meter')">VU Meter</button>
+      <button class="tablinks" onclick="selectVisualization(event, 'Spectrum')">Spectrum</button>
+      <button class="tablinks" onclick="selectVisualization(event, 'Lissajous')">Lissajous</button>
+    </div>
 
-		<div id="Waveform" class="tabcontent"></div>
-		<div id="VU Meter" class="tabcontent"></div>
-		<div id="Spectrum" class="tabcontent"></div>
-		<div id="Lissajous" class="tabcontent"></div>
+    <div id="Waveform" class="tabcontent"></div>
+    <div id="VU Meter" class="tabcontent"></div>
+    <div id="Spectrum" class="tabcontent"></div>
+    <div id="Lissajous" class="tabcontent"></div>
 
-		<div id="sketch-holder"></div>
-	</div>
+    <div id="sketch-holder"></div>
+  </div>
 
-	<div id="pain-dialog" title="Pain Tool">
-		<div class="warning-text">
-			The Pain Tool allows you to interrupt the signal that is currently being played
-			on this channel temporarily, in order to administer sharp shocks.
-			After completing the specified number of shocks, the signal that was playing
-			previously will automatically resume.
-		</div>
-		<div class="warning-text">
-			<strong>Please use this tool responsibly! </strong>
-		</div>
-		<div>
+  <div id="pain-dialog" title="Pain Tool">
+    <div class="warning-text">
+      The Pain Tool allows you to interrupt the signal that is currently being played
+      on this channel temporarily, in order to administer sharp shocks.
+      After completing the specified number of shocks, the signal that was playing
+      previously will automatically resume.
+    </div>
+    <div class="warning-text">
+      <strong>Please use this tool responsibly! </strong>
+    </div>
+    <div>
 
-			<div class="form-row">
-				<label>Shock Volume</label>
-				<input name="pain-volume" value="60" class="spinner-volume"> %
-			</div>
-			<div class="form-row">
-				<label>Shock Frequency</label>
-				<input name="pain-frequency" value="1600" class="spinner-frequency"> Hz.
-			</div>
-			<div class="form-row">
-				<label>Number of Shocks</label>
-				<input name="pain-number" value="5" class="spinner-volume">
-			</div>
-			<div class="form-row">
-				<label>Shock Duration</label>
-				<input name="pain-duration" value="0.05" class="spinner-change-rate"> sec.
-			</div>
-			<div class="form-row">
-				<label>Time Between Shocks</label>
-				<input name="pain-time-between" value="0.3" class="spinner-change-rate"> sec.
-			</div>
-		</div>
-	</div>
+      <div class="form-row">
+        <label>Shock Volume</label>
+        <input name="pain-volume" value="60" class="spinner-volume"> %
+      </div>
+      <div class="form-row">
+        <label>Shock Frequency</label>
+        <input name="pain-frequency" value="1600" class="spinner-frequency"> Hz.
+      </div>
+      <div class="form-row">
+        <label>Number of Shocks</label>
+        <input name="pain-number" value="5" class="spinner-volume">
+      </div>
+      <div class="form-row">
+        <label>Shock Duration</label>
+        <input name="pain-duration" value="0.05" class="spinner-change-rate"> sec.
+      </div>
+      <div class="form-row">
+        <label>Time Between Shocks</label>
+        <input name="pain-time-between" value="0.3" class="spinner-change-rate"> sec.
+      </div>
+    </div>
+  </div>
 
-	<script src="/js/config.js"></script>
-	<script src="/js/electron.js"></script>
-	<script src="/js/communication.js"></script>
+  <script src="/js/config.js"></script>
+  <script src="/js/electron.js"></script>
+  <script src="/js/communication.js"></script>
 </body>
 
 </html>
