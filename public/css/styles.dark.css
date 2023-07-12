@@ -132,8 +132,15 @@ div.mode-selector-box {
 
 .ui-widget-content {
 	color: #FFF;
+	border: 1px solid #555;
 }
 
 .ui-button .ui-icon, .ui-button:hover .ui-icon {
 	background-image: url("https://code.jquery.com/ui/1.12.1/themes/ui-darkness/images/ui-icons_cccccc_256x240.png");
+}
+
+.ui-widget-header {
+	border: 1px solid #555;
+	background: #303030;
+	color: #FFF;
 }
