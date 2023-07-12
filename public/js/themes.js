@@ -1,17 +1,14 @@
 let lightTheme = true;
 function toggleTheme() {
-    const localStylesheet = document.getElementById("local-stylesheet");
-    const jqueryuiStylesheet = document.getElementById("jqueryui-stylesheet");
+    const darkmodeStylesheet = document.getElementById("darkmode-stylesheet");
 
     if (lightTheme) {
         lightTheme = false;
-        localStylesheet.setAttribute("href", "/css/styles.dark.css");
-        jqueryuiStylesheet.setAttribute("href", "https://code.jquery.com/ui/1.12.1/themes/ui-darkness/jquery-ui.css");
+        darkmodeStylesheet.href = "/css/styles.dark.css";
         setThemeCookie("dark", 30); // Save the user's choice in a cookie
     } else {
         lightTheme = true;
-        localStylesheet.setAttribute("href", "/css/styles.css");
-        jqueryuiStylesheet.setAttribute("href", "https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css");
+        darkmodeStylesheet.href = "";
         setThemeCookie("light", 30); // Save the user's choice in a cookie
     }
 }

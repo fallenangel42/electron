@@ -1,10 +1,5 @@
-html {
-    min-height: 100%;
-}
-
 body {
     background: #151515;
-    font-family: Cabin, sans-serif;
 }
 
 a {
@@ -16,11 +11,6 @@ a {
 #initialize-audio,
 #rider-count {
     background: #303030;
-    border: 0;
-    border-radius: 5px;
-    margin: 30px auto;
-    padding: 15px;
-    width: 1000px;
 }
 
 #status-message,
@@ -29,185 +19,37 @@ a {
     background: #404040;
     border: 1px solid #888;
     color: #ccc;
-    font-size: 18px;
-    line-height: 1.5em;
-    text-align: center;
-}
-
-#initialize-audio {
-    font-size: 24px;
-    font-weight: bold;
-}
-
-#left-channel-column,
-#right-channel-column {
-    box-shadow: 0 -2px 3px rgba(0, 0, 0, 0.4) inset;
-    color: #FFF;
-    float: left;
-    margin: 10px;
-    width: 480px;
 }
 
 div.color-header {
-    height: 40px;
     color: black;
-    padding: 15px;
-}
-
-div.color-header h2 {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    width: fit-content;
-}
-
-#left-channel-column div.color-header {
-    background: #03a9f4;
-}
-
-#right-channel-column div.color-header {
-    background: #8bc34a;
 }
 
 #left-channel-column .content,
 #right-channel-column .content {
     color: #aaa;
-    font-weight: 400;
-    padding: 5px 15px 15px;
 }
 
 #left-channel-column button.apply-btn {
-    background: #03a9f4;
     color: black;
 }
 
 #right-channel-column button.apply-btn {
-    background: #8bc34a;
     color: black;
 }
 
-button.apply-btn,
 button.pain-btn {
-    border: 0;
-    border-radius: 5px;
-    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.4);
-    color: #FFF;
-    cursor: pointer;
-    display: block;
-    font-family: Cabin, sans-serif;
-    font-size: 16px;
-    margin: 30px auto auto;
-    padding: 10px;
-    text-align: center;
-    width: 100%;
-}
-
-button.pain-btn {
-    background: #400;
-}
-
-button.stop-btn {
-    background: #d00;
-    border: 0;
-    border-radius: 20px;
-    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.4);
-    color: #FFF;
-    cursor: pointer;
-    float: right;
-    font-size: 18px;
-    font-weight: 700;
-    line-height: 20px;
-    padding: 10px 20px;
-    position: relative;
-}
-
-button.home-btn {
-    align-self: flex-end;
-    background: #8bc34a;
-    border: 0;
-    border-radius: 20px;
-    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.4);
-    color: white;
-    letter-spacing: 0.5px;
-    cursor: pointer;
-    font-size: 18px;
-    font-weight: 700;
-    line-height: 20px;
-    margin-top: 10px;
-    padding: 10px 20px;
-    width: 100%;
-}
-
-button.home-btn:hover {
-    background: #77a83e;
-}
-
-h2 {
-    float: left;
-    font-size: 22px;
-    margin: 0;
-}
-
-.form-row {
-    font-size: 16px;
-    margin-bottom: 10px;
-}
-
-.form-row input,
-.form-row select {
-    font-family: Cabin, sans-serif;
-    font-size: 16px;
-    font-weight: 300;
-    width: 110px;
-}
-
-.form-row label {
-    display: inline-block;
-    font-weight: 600;
-    width: 230px;
-}
-
-.form-row .detailed-description {
-    font-size: 14px;
-    margin-left: 20px;
-    margin-top: 10px;
+    background: #300;
 }
 
 .footnotes {
     background: #303030;
     color: #ccc;
-    border-radius: 5px;
-    margin: auto;
-    margin-top: 20px;
-    padding: 25px;
-    text-align: center;
-    width: 1010px;
-    box-shadow: 0 -2px 3px rgba(0, 0, 0, 0.4) inset;
-    text-align: left;
-}
-
-.footnotes h2 {
-    float: none;
-}
-
-.footnotes h2 span {
-    color: red;
 }
 
 #sketch-holder-wrapper {
     background: #303030;
-    border-radius: 5px;
-    margin: auto;
-    padding: 25px;
-    text-align: center;
-    width: 980px;
     color: #ccc;
-}
-
-#sketch-holder {
-    box-shadow: 0 -2px 3px rgba(0, 0, 0, 0.4) inset;
-    padding: 25px;
 }
 
 /* Style the tab */
@@ -219,16 +61,7 @@ h2 {
 
 /* Style the buttons that are used to open the tab content */
 .tab button {
-    background-color: inherit;
-    float: left;
     border: 1px solid #444;
-    outline: none;
-    cursor: pointer;
-    padding: 14px 16px;
-    transition: 0.3s;
-    font-family: Cabin, sans-serif;
-    font-size: 16px;
-    font-weight: 600;
     color: #ccc;
 }
 
@@ -247,97 +80,56 @@ h2 {
 }
 
 .electron-title {
-    font-family: 'Titillium Web';
-    font-size: 64px;
-    font-weight: 200;
-    letter-spacing: .3em;
-    margin-top: 30px;
-    text-align: center;
     text-shadow: 0 0 5px #3EB0FF, 0 0 15px #3EB0FF;
-    color: #3eB0FF;
-}
-
-.electron-title a {
-    text-decoration: none;
     color: #3eB0FF;
 }
 
 #session-id {
     background: #404040;
     border: 1px solid #888;
-    border-radius: 5px;
-    font-family: Cabin, sans-serif;
-    font-size: 20px;
-    font-weight: 300;
-    padding: 10px;
-    text-align: center;
-    width: 180px;
-}
-
-#mode-selector-container {
-    display: inline-flex;
-    width: fit-content;
 }
 
 div.mode-selector-box {
     background: #303030;
-    border-radius: 5px;
-    box-shadow: 0 -2px 3px rgba(0, 0, 0, 0.4) inset;
     color: #ccc;
-    height: 300px;
-    display: inline-grid;
-    margin-inline: 10px;
-    padding: 20px;
-    text-align: center;
-    width: 300px;
-}
-
-#join-session-warning-text {
-    color: #a00;
-}
-
-div.mode-selector-box div {
-    height: 190px;
-}
-
-div.mode-selector-box div.home-btn-wrapper {
-    height: fit-content;
-    display: flex;
-    flex-direction: column-reverse;
-    align-self: end;
-}
-
-div.mode-selector-box p {
-    color: #888;
-}
-
-.ui-selectmenu-button.ui-button {
-    width: 117px;
-}
-
-.slider-wrapper {
-    margin-bottom: 30px;
-}
-
-#pain-dialog .warning-text {
-    color: #a00;
-    line-height: 150%;
-    margin: 12px 0;
 }
 
 #theme-toggler {
     background-color: #333;
-    border: none;
-    border-radius: 5px;
-    bottom: 20px;
-    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.25);
     color: #fff;
-    cursor: pointer;
-    right: 20px;
-    outline: none;
-    padding: 10px 20px;
-    position: fixed;
-    text-align: center;
-    z-index: 1000;
-    font-weight: bold;
+}
+
+/* Replace the old jquery dark theme */
+.form-row input,
+.form-row select {
+	background: #212121;
+	color: #FFF;
+}
+
+.ui-widget-content {
+	background: #212121;
+}
+
+.ui-widget.ui-widget-content {
+	border: 1px solid #555555;
+}
+
+.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default, .ui-button, html .ui-button.ui-state-disabled:hover, html .ui-button.ui-state-disabled:active {
+	border: 1px solid #555;
+	background: #303030;
+	color: #FFF;
+}
+
+.ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus, .ui-button:hover, .ui-button:focus {
+	border: 1px solid #555;
+	background: #404040;
+	color: #FFF;
+}
+
+.ui-widget-content {
+	color: #FFF;
+}
+
+.ui-button .ui-icon, .ui-button:hover .ui-icon {
+	background-image: url("https://code.jquery.com/ui/1.12.1/themes/ui-darkness/images/ui-icons_cccccc_256x240.png");
 }
