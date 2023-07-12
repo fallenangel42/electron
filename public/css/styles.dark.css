@@ -99,6 +99,10 @@ div.mode-selector-box {
     color: #fff;
 }
 
+#theme-toggler:hover {
+    background-color: #444;
+}
+
 /* Replace the old jquery dark theme */
 .form-row input,
 .form-row select {

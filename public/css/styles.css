@@ -337,3 +337,7 @@ div.mode-selector-box p {
     z-index: 1000;
     font-weight: bold;
 }
+
+#theme-toggler:hover {
+    background-color: #eee;
+}
