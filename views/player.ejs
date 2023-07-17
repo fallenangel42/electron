@@ -37,6 +37,11 @@
 
   <div style="display:none;" id="rider-count">
     Number of connected riders: <strong id="rider-count-number">0</strong>
+    <div class="traffic-bar-container">
+      <div class="traffic-bar red"></div>
+      <div class="traffic-bar yellow"></div>
+      <div class="traffic-bar green"></div>
+    </div>
   </div>
 
   <div style="display:none;" id="initialize-audio">
@@ -44,6 +49,22 @@
   </div>
 
   <div id="main-container">
+
+    <div class="traffic-light" id="traffic-light" style="display: none;">
+      <div class="traffic-light-explanation">
+        <p>Use this tool to indicate the driver how you are feeling.</p>
+        <ul>
+          <li>GREEN means you are enjoying yourself.</li>
+          <li>YELLOW means you are getting close to your limits / need a break.</li>
+          <li>RED means you need the power to be dialed down / stop.</li>
+        </ul>
+      </div>
+      <div class="traffic-light-container">
+        <button class="green active" title="Green" data-traffic-light="G"></button>
+        <button class="yellow" title="Yellow" data-traffic-light="Y"></button>
+        <button class="red" title="Red" data-traffic-light="R"></button>
+      </div>
+    </div>
 
     <div id="left-channel-column">
       <div class="color-header">
@@ -189,6 +210,7 @@
   <script src="/js/config.js"></script>
   <script src="/js/electron.js"></script>
   <script src="/js/communication.js"></script>
+  <script src="/js/trafficlight.js"></script>
 </body>
 
 </html>

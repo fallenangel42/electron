@@ -34,6 +34,18 @@ $(function () {
             $('#initialize-audio').hide();
         });
 
+        // show traffic light container
+        $('#traffic-light').show();
+        // event listeners for traffic light system
+        $(window).on('traffic-light', function () {
+            const data = {
+                sessId: sessId,
+                color: $('#traffic-light button.active').data('traffic-light')
+            };
+            socket.emit('trafficLight', data);
+            return false;
+        });
+
         // ---RIDER---
         // receive events and populate input fields
         ['left', 'right'].forEach(function (channel) {
@@ -90,7 +102,18 @@ $(function () {
             }, 5000);
 
             socket.on('riderCount', function (msg) {
-                $('#rider-count-number').text(msg);
+                $('#rider-count-number').text(msg.total);
+                const total = msg.total;
+                const redWidth = msg.total === 0 ? 0 : (msg.R / total) * 100;
+                const yellowWidth = msg.total === 0 ? 0 : (msg.Y / total) * 100;
+                const greenWidth = msg.total === 0 ? 0 : (msg.G / total) * 100;
+                const redBar = document.querySelector('.traffic-bar.red');
+                const yellowBar = document.querySelector('.traffic-bar.yellow');
+                const greenBar = document.querySelector('.traffic-bar.green');
+
+                redBar.style.width = `${redWidth}%`;
+                yellowBar.style.width = `${yellowWidth}%`;
+                greenBar.style.width = `${greenWidth}%`;
             });
         });
 
@@ -159,4 +182,4 @@ $(function () {
         });
     }
 
-});
+});;

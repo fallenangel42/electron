@@ -105,11 +105,27 @@ module.exports = function (electronState) {
 
         // ====== getRiderCount ======
         // returns how many riders are currently connected to this session
+        // and how many are there in each possible traffic light status
+        // (green, yellow, red)
         socket.on('getRiderCount', function (msg) {
             if (electronState.validateDriverToken(msg.sessId, msg.driverToken)) {
                 const riderSockets = electronState.getRiderSockets(msg.sessId);
-                socket.emit('riderCount', riderSockets.length);
+                let riderData = { 'G': 0, 'Y': 0, 'R': 0, 'total': 0 };
+
+                riderSockets.forEach(function (s) {
+                    const color = electronState.getRiderTrafficLight(s);
+                    riderData[color]++;
+                    riderData.total++;
+                });
+                socket.emit('riderCount', riderData);
             }
+        });
+
+        // ====== trafficLight ======
+        // handles the red / yellow / green traffic light system that riders
+        // use to inform drivers about how they are doing
+        socket.on('trafficLight', function (msg) {
+            electronState.setRiderTrafficLight(msg.sessId, socket, msg.color);
         });
 
         // ====== disconnect ======

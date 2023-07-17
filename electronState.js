@@ -8,6 +8,7 @@ class ElectronState {
         this.riders = {};           // stores all sockets for people riding each session
         this.lastMessages = {};     // storage of incoming messages (setting waveform parameters, pain tool, etc.)
         this.automatedDrivers = {}; // stores automated drivers by their session ids
+        this.trafficLights = {};    // dictionary binding sockets to red / yellow / green traffic lights
     }
 
     addDriverToken(sessId, token) {
@@ -47,6 +48,22 @@ class ElectronState {
         this.lastMessages[sessId][channel] = message;
     }
 
+    setRiderTrafficLight(sessId, socket, color) {
+        const sockets = this.getRiderSockets(sessId);
+        const invalidColor = ['R', 'Y', 'G'].indexOf(color) === -1;
+        if (sockets.indexOf(socket) === -1 || invalidColor) {
+            return;
+        }
+        this.trafficLights[socket.id] = color;
+    }
+
+    getRiderTrafficLight(socket) {
+        if (socket.id in this.trafficLights) {
+            return this.trafficLights[socket.id];
+        }
+        return 'G';
+    }
+
     getLastMessage(sessId, channel) {
         if (!(sessId in this.lastMessages) || !(channel in this.lastMessages[sessId])) {
             return null;
@@ -61,6 +78,7 @@ class ElectronState {
                 this.riders[sessId].splice(index, 1);
             }
         }
+        delete this.trafficLights[socket.id];
     }
 
     startAutomatedDriver(sessId, automatedDriverConfig) {
