@@ -5,14 +5,16 @@ const AutomatedDriver = require('./automatedDriver');
 class ElectronState {
     constructor() {
         this.driverTokens = {};     // stores the authentication tokens of drivers
+        this.driverSockets = {};    // stores sockets for people driving sessions
         this.riders = {};           // stores all sockets for people riding each session
         this.lastMessages = {};     // storage of incoming messages (setting waveform parameters, pain tool, etc.)
         this.automatedDrivers = {}; // stores automated drivers by their session ids
         this.trafficLights = {};    // dictionary binding sockets to red / yellow / green traffic lights
     }
 
-    addDriverToken(sessId, token) {
+    addDriverToken(sessId, token, socket) {
         this.driverTokens[sessId] = token;
+        this.driverSockets[sessId] = socket;
     }
 
     driverTokenExists(sessId) {
@@ -41,6 +43,10 @@ class ElectronState {
         return this.riders[sessId];
     }
 
+    getDriverSocket(sessId) {
+        return this.driverSockets[sessId];
+    }
+
     storeLastMessage(sessId, channel, message) {
         if (!this.lastMessages[sessId]) {
             this.lastMessages[sessId] = {};
@@ -50,7 +56,7 @@ class ElectronState {
 
     setRiderTrafficLight(sessId, socket, color) {
         const sockets = this.getRiderSockets(sessId);
-        const invalidColor = ['R', 'Y', 'G'].indexOf(color) === -1;
+        const invalidColor = ['R', 'Y', 'G', 'N'].indexOf(color) === -1;
         if (sockets.indexOf(socket) === -1 || invalidColor) {
             return;
         }
@@ -58,10 +64,11 @@ class ElectronState {
     }
 
     getRiderTrafficLight(socket) {
+        // valid values: R (red), Y (yellow), G (green), N (none)
         if (socket.id in this.trafficLights) {
             return this.trafficLights[socket.id];
         }
-        return 'G';
+        return 'N';
     }
 
     getLastMessage(sessId, channel) {
@@ -69,6 +76,19 @@ class ElectronState {
             return null;
         }
         return this.lastMessages[sessId][channel];
+    }
+
+    getRiderData(sessId) {
+        const riderSockets = this.getRiderSockets(sessId);
+        const self = this;
+        let riderData = { 'G': 0, 'Y': 0, 'R': 0, 'N': 0, 'total': 0 };
+
+        riderSockets.forEach(function (s) {
+            const color = self.getRiderTrafficLight(s);
+            riderData[color]++;
+            riderData.total++;
+        });
+        return riderData;
     }
 
     onDisconnect(socket) {

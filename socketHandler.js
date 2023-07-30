@@ -44,7 +44,7 @@ module.exports = function (electronState) {
             console.log('User registered as driver for ' + sessId);
             if (!electronState.driverTokenExists(sessId)) {
                 const token = generateToken();
-                electronState.addDriverToken(sessId, token);
+                electronState.addDriverToken(sessId, token, socket);
                 socket.emit('driverToken', token);
                 console.log('User APPROVED as driver for ' + sessId);
             } else {
@@ -109,14 +109,7 @@ module.exports = function (electronState) {
         // (green, yellow, red)
         socket.on('getRiderCount', function (msg) {
             if (electronState.validateDriverToken(msg.sessId, msg.driverToken)) {
-                const riderSockets = electronState.getRiderSockets(msg.sessId);
-                let riderData = { 'G': 0, 'Y': 0, 'R': 0, 'total': 0 };
-
-                riderSockets.forEach(function (s) {
-                    const color = electronState.getRiderTrafficLight(s);
-                    riderData[color]++;
-                    riderData.total++;
-                });
+                const riderData = electronState.getRiderData(msg.sessId);
                 socket.emit('riderCount', riderData);
             }
         });
@@ -126,6 +119,9 @@ module.exports = function (electronState) {
         // use to inform drivers about how they are doing
         socket.on('trafficLight', function (msg) {
             electronState.setRiderTrafficLight(msg.sessId, socket, msg.color);
+            const riderData = electronState.getRiderData(msg.sessId);
+            const driverSocket = electronState.getDriverSocket(msg.sessId);
+            driverSocket.emit('riderCount', riderData);
         });
 
         // ====== disconnect ======

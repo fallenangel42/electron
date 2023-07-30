@@ -102,18 +102,22 @@ $(function () {
             }, 5000);
 
             socket.on('riderCount', function (msg) {
-                $('#rider-count-number').text(msg.total);
+                // render traffic light bars, based on the status of the riders
                 const total = msg.total;
-                const redWidth = msg.total === 0 ? 0 : (msg.R / total) * 100;
-                const yellowWidth = msg.total === 0 ? 0 : (msg.Y / total) * 100;
-                const greenWidth = msg.total === 0 ? 0 : (msg.G / total) * 100;
-                const redBar = document.querySelector('.traffic-bar.red');
-                const yellowBar = document.querySelector('.traffic-bar.yellow');
-                const greenBar = document.querySelector('.traffic-bar.green');
+                const bars = [
+                    { colorClass: 'red', value: msg.R },
+                    { colorClass: 'yellow', value: msg.Y },
+                    { colorClass: 'green', value: msg.G },
+                    { colorClass: 'none', value: msg.N }
+                ];
 
-                redBar.style.width = `${redWidth}%`;
-                yellowBar.style.width = `${yellowWidth}%`;
-                greenBar.style.width = `${greenWidth}%`;
+                bars.forEach(function (bar) {
+                    const element = document.querySelector(`.traffic-bar.${bar.colorClass}`);
+                    element.style.width = `${total === 0 ? 0 : (bar.value / total) * 100}%`;
+                });
+
+                // update the rider count on the page
+                $('#rider-count-number').text(total);
             });
         });
 
