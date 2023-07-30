@@ -44,7 +44,7 @@ module.exports = function (electronState) {
             console.log('User registered as driver for ' + sessId);
             if (!electronState.driverTokenExists(sessId)) {
                 const token = generateToken();
-                electronState.addDriverToken(sessId, token);
+                electronState.addDriverToken(sessId, token, socket);
                 socket.emit('driverToken', token);
                 console.log('User APPROVED as driver for ' + sessId);
             } else {
@@ -105,11 +105,23 @@ module.exports = function (electronState) {
 
         // ====== getRiderCount ======
         // returns how many riders are currently connected to this session
+        // and how many are there in each possible traffic light status
+        // (green, yellow, red)
         socket.on('getRiderCount', function (msg) {
             if (electronState.validateDriverToken(msg.sessId, msg.driverToken)) {
-                const riderSockets = electronState.getRiderSockets(msg.sessId);
-                socket.emit('riderCount', riderSockets.length);
+                const riderData = electronState.getRiderData(msg.sessId);
+                socket.emit('riderCount', riderData);
             }
+        });
+
+        // ====== trafficLight ======
+        // handles the red / yellow / green traffic light system that riders
+        // use to inform drivers about how they are doing
+        socket.on('trafficLight', function (msg) {
+            electronState.setRiderTrafficLight(msg.sessId, socket, msg.color);
+            const riderData = electronState.getRiderData(msg.sessId);
+            const driverSocket = electronState.getDriverSocket(msg.sessId);
+            driverSocket.emit('riderCount', riderData);
         });
 
         // ====== disconnect ======

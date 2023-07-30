@@ -34,6 +34,18 @@ $(function () {
             $('#initialize-audio').hide();
         });
 
+        // show traffic light container
+        $('#traffic-light').show();
+        // event listeners for traffic light system
+        $(window).on('traffic-light', function () {
+            const data = {
+                sessId: sessId,
+                color: $('#traffic-light button.active').data('traffic-light')
+            };
+            socket.emit('trafficLight', data);
+            return false;
+        });
+
         // ---RIDER---
         // receive events and populate input fields
         ['left', 'right'].forEach(function (channel) {
@@ -90,7 +102,22 @@ $(function () {
             }, 5000);
 
             socket.on('riderCount', function (msg) {
-                $('#rider-count-number').text(msg);
+                // render traffic light bars, based on the status of the riders
+                const total = msg.total;
+                const bars = [
+                    { colorClass: 'red', value: msg.R },
+                    { colorClass: 'yellow', value: msg.Y },
+                    { colorClass: 'green', value: msg.G },
+                    { colorClass: 'none', value: msg.N }
+                ];
+
+                bars.forEach(function (bar) {
+                    const element = document.querySelector(`.traffic-bar.${bar.colorClass}`);
+                    element.style.width = `${total === 0 ? 0 : (bar.value / total) * 100}%`;
+                });
+
+                // update the rider count on the page
+                $('#rider-count-number').text(total);
             });
         });
 
@@ -159,4 +186,4 @@ $(function () {
         });
     }
 
-});
+});;

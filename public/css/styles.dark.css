@@ -106,41 +106,61 @@ div.mode-selector-box {
 /* Replace the old jquery dark theme */
 .form-row input,
 .form-row select {
-	background: #212121;
-	color: #FFF;
+    background: #212121;
+    color: #FFF;
 }
 
 .ui-widget-content {
-	background: #212121;
+    background: #212121;
 }
 
 .ui-widget.ui-widget-content {
-	border: 1px solid #555555;
+    border: 1px solid #555555;
 }
 
-.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default, .ui-button, html .ui-button.ui-state-disabled:hover, html .ui-button.ui-state-disabled:active {
-	border: 1px solid #555;
-	background: #303030;
-	color: #FFF;
+.ui-state-default,
+.ui-widget-content .ui-state-default,
+.ui-widget-header .ui-state-default,
+.ui-button,
+html .ui-button.ui-state-disabled:hover,
+html .ui-button.ui-state-disabled:active {
+    border: 1px solid #555;
+    background: #303030;
+    color: #FFF;
 }
 
-.ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus, .ui-button:hover, .ui-button:focus {
-	border: 1px solid #555;
-	background: #404040;
-	color: #FFF;
+.ui-state-hover,
+.ui-widget-content .ui-state-hover,
+.ui-widget-header .ui-state-hover,
+.ui-state-focus,
+.ui-widget-content .ui-state-focus,
+.ui-widget-header .ui-state-focus,
+.ui-button:hover,
+.ui-button:focus {
+    border: 1px solid #555;
+    background: #404040;
+    color: #FFF;
 }
 
 .ui-widget-content {
-	color: #FFF;
-	border: 1px solid #555;
+    color: #FFF;
+    border: 1px solid #555;
 }
 
-.ui-button .ui-icon, .ui-button:hover .ui-icon {
-	background-image: url("https://code.jquery.com/ui/1.12.1/themes/ui-darkness/images/ui-icons_cccccc_256x240.png");
+.ui-button .ui-icon,
+.ui-button:hover .ui-icon {
+    background-image: url("https://code.jquery.com/ui/1.12.1/themes/ui-darkness/images/ui-icons_cccccc_256x240.png");
 }
 
 .ui-widget-header {
-	border: 1px solid #555;
-	background: #303030;
-	color: #FFF;
+    border: 1px solid #555;
+    background: #303030;
+    color: #FFF;
+}
+
+.traffic-light-explanation,
+.traffic-light-container {
+    background: #404040;
+    border: 1px solid #888;
+    color: #ccc;
 }
