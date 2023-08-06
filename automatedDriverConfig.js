@@ -8,7 +8,11 @@ const automatedDriverConfig = {
     painMinShockLength: 0.05,
     painMaxShockLength: 0.5,
     painMinTimeBetweenShocks: 0.2,
-    painMaxTimeBetweenShocks: 1.0
+    painMaxTimeBetweenShocks: 1.0,
+    amTypes: {
+        waveforms: ["sine", "square", "triangle", "sawtooth"],
+        probabilities: [0.4, 0.3, 0.15, 0.15],
+    } // make sure probabilities add up to 1.0
 };
 
 module.exports = automatedDriverConfig;

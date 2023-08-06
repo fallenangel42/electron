@@ -45,13 +45,7 @@ class AutomatedDriver {
             channel.amFreq = 0;
             channel.amDepth = 0;
         } else {
-            if (Math.random() < 0.7) {
-                // 70% chance of sine
-                channel.amType = 'sine';
-            } else {
-                // 30% chance of square
-                channel.amType = 'square';
-            }
+            channel.amType = this.getRandomAMType();
             // Increase max value from 2 to 10 over session
             const amFreqMax = Math.min(2 + 8 * (elapsedMinutes / this.sessionDuration), 10);
             channel.amFreq = parseFloat((Math.random() * amFreqMax).toFixed(2));
@@ -59,8 +53,23 @@ class AutomatedDriver {
             let amDepth = this.minAMDepth + Math.random() * (this.maxAMDepth - this.minAMDepth);
             amDepth = amDepth * (channel.volume / 100.0); // make AM depth proportional to volume
             channel.amDepth = parseFloat(amDepth).toFixed(2);
-
         }
+    }
+
+    getRandomAMType() {
+        const probabilityConfig = this.amTypes;
+        let probabilitySum = 0;
+
+        // Add all probabilities together in order to determine a cutoff point later
+        const waveformProbabilities = probabilityConfig.waveforms.map((waveform, index) => {
+            probabilitySum += probabilityConfig.probabilities[index];
+            return { waveform, probability: probabilitySum };
+        });
+
+        // Find the randomly selected waveform based on a random number
+        const randomNum = Math.random();
+        const selectedWaveform = waveformProbabilities.find(waveform => randomNum < waveform.probability);
+        return selectedWaveform.waveform;
     }
 
     varyFrequency(channel) {
