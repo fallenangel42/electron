@@ -121,7 +121,9 @@ module.exports = function (electronState) {
             electronState.setRiderTrafficLight(msg.sessId, socket, msg.color);
             const riderData = electronState.getRiderData(msg.sessId);
             const driverSocket = electronState.getDriverSocket(msg.sessId);
-            driverSocket.emit('riderCount', riderData);
+            if (driverSocket) {
+                driverSocket.emit('riderCount', riderData);
+            }
         });
 
         // ====== disconnect ======
