@@ -60,7 +60,7 @@ $(function () {
                 $(channelSel + 'input[name="am-depth"]').val(clamp(msg.amDepth, 0, 100));
                 $(channelSel + 'input[name="am-frequency"]').val(clamp(msg.amFreq, 0, 100));
                 $(channelSel + 'select[name="fm-type"]').val(msg.fmType).selectmenu('refresh');
-                $(channelSel + 'input[name="fm-depth"]').val(clamp(msg.fmDepth, 0, 100));
+                $(channelSel + 'input[name="fm-depth"]').val(clamp(msg.fmDepth, 0, 1000));
                 $(channelSel + 'input[name="fm-frequency"]').val(clamp(msg.fmFreq, 0, 100));
                 $(channelSel + 'input[name="ramp-rate"]').val(clamp(msg.rampRate, 0, 10));
                 $(channelSel + 'input[name="ramp-target"]').val(clamp(msg.rampTarget, 0, 100));
