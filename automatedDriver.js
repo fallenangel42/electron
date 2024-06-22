@@ -72,11 +72,24 @@ class AutomatedDriver {
         return selectedWaveform.waveform;
     }
 
-    varyFrequency(channel) {
-        // Slightly vary the frequencies
-        const variation = (Math.random() * 2 - 1) * 50; // Random value between -50 and 50
-        channel.freq = Math.max(this.minFrequency, Math.min(this.maxFrequency, channel.freq + variation));
-        channel.freq = Math.round(channel.freq);
+    varyFrequency(channel, otherChannelFreq) {
+        // Vary the frequencies using a random walk with reflective boundaries
+        // Limit the step size to be the lesser of 50 Hz or the min-to-max frequency span
+        const variation = (Math.random() * 2 - 1) * Math.min(50, this.maxFrequency - this.minFrequency);
+        let newFreq = channel.freq + variation;
+        if (newFreq < this.minFrequency) {
+            newFreq = 2 * this.minFrequency - newFreq;
+        } else if (newFreq > this.maxFrequency) {
+            newFreq = 2 * this.maxFrequency - newFreq;
+        }
+        // Round frequency to the nearest 0.1 Hz
+        newFreq = Math.round(newFreq * 10) / 10;
+        if (newFreq != otherChannelFreq) {
+            channel.freq = newFreq;
+        }
+        // Do not change frequency if it is the same as other channel's frequency,
+        // because in triphase configuration channels can cancel or add too strongly.
+        // Instead keep the same frequency and wait for the next update.
     }
 
     emitToRiders(channel, channelName, electronState) {
@@ -121,7 +134,7 @@ class AutomatedDriver {
         electronState.storeLastMessage(this.sessId, channelName, msg);
     }
 
-    processChannel(channel, channelName, elapsedMinutes, electronState) {
+    processChannel(channel, channelName, otherChannel, elapsedMinutes, electronState) {
         // first, we consider the possibility of pain!
         if (Math.random() < (this.painProbability * 0.01) && elapsedMinutes > 0) {
             console.log(`Automated driver ${this.sessId} is sending PAIN signal to the ${channelName.toUpperCase()} channel`);
@@ -135,7 +148,7 @@ class AutomatedDriver {
             this.toggleAM(channel, elapsedMinutes);
         }
 
-        this.varyFrequency(channel);
+        this.varyFrequency(channel, otherChannel.freq);
         this.emitToRiders(channel, channelName, electronState);
         console.log(`Automated driver ${this.sessId} made changes to the ${channelName.toUpperCase()} channel. Elapsed minutes: ${elapsedMinutes.toFixed(2)}`);
     }
@@ -157,12 +170,12 @@ class AutomatedDriver {
     runActionsOnChannels(elapsedMinutes, electronState) {
         if (Math.random() < 0.5 || elapsedMinutes === 0) {
             // 50% chance of making changes to the left channel
-            this.processChannel(this.leftChannel, 'left', elapsedMinutes, electronState);
+            this.processChannel(this.leftChannel, 'left', this.rightChannel, elapsedMinutes, electronState);
         }
 
         if (Math.random() < 0.5 || elapsedMinutes === 0) {
             // 50% chance of making changes to the right channel
-            this.processChannel(this.rightChannel, 'right', elapsedMinutes, electronState);
+            this.processChannel(this.rightChannel, 'right', this.leftChannel, elapsedMinutes, electronState);
         }
     }
 
